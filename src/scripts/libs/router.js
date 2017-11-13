@@ -1,4 +1,4 @@
-/* global window document */
+/* global window, document */
 
 'use strict'
 
