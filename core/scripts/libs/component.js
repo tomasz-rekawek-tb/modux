@@ -1,4 +1,4 @@
-/* global HTMLElement */
+/* globals HTMLElement */
 
 'use strict'
 

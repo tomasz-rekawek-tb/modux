@@ -1,3 +1,4 @@
+/* globals document */
 'use strict'
 
 module.exports = ( text ) => {
