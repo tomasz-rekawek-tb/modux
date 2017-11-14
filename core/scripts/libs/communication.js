@@ -19,18 +19,21 @@ class Communication {
   }
 
   listener ( progress, end ) {
+    const self = this
     this.__request.onloadend = function ( ev ) {
-      if ( this.__request.status === 200 ) {
+      if ( self.__request.status === 200 ) {
         end( null, ev.target.responseText )
       } else {
-        end( this._request.status )
+        end( self._request.status )
       }
     }
-    this.__request.onprogress = function ( ev ) {
-      if ( ev.lengthComputable ) {
-        progress( ev.loaded / ev.total )
-      } else {
-        progress()
+    if ( progress ) {
+      this.__request.onprogress = function ( ev ) {
+        if ( ev.lengthComputable ) {
+          progress( ev.loaded / ev.total )
+        } else {
+          progress()
+        }
       }
     }
   }
