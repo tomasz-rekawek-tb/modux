@@ -1,6 +1,18 @@
 # modux
 A framework used in front end application creation
 
+## Running
+
+Testing an application
+```
+npm test -- --env.app=APPLICATION_NAME
+```
+
+Building an application
+```
+npm run build -- --env.app=APPLICATION_NAME
+```
+
 ## How to use
 
 Clone the `modux` repository:
@@ -8,7 +20,7 @@ Clone the `modux` repository:
 git clone https://github.com/CrispCode/modux.git
 ```
 
-Add your application to the `apps` folder. The application needs to have the following directory structure
+Add your application to the `apps` folder, using a symlink. The application needs to have the following directory structure
 ```
     app/
         /api
