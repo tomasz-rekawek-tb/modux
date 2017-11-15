@@ -21,6 +21,7 @@ let getFirstApplication = ( dir ) => {
 }
 
 let apps = getFirstApplication( path.join( __dirname, 'apps' ) )
+let build = path.join( __dirname, 'build' )
 
 module.exports = {
   entry: {
@@ -29,7 +30,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.join( __dirname, 'build' ),
+    path: build,
     filename: '[name].min.js'
   },
   devServer: {
@@ -38,8 +39,11 @@ module.exports = {
     inline: true,
     host: '0.0.0.0',
     port: 8080,
-    contentBase: path.join( __dirname, '/build' ),
+    contentBase: build,
     historyApiFallback: true
+  },
+  resolve: {
+    symlinks: false
   },
   module: {
     loaders: [
@@ -78,10 +82,7 @@ module.exports = {
       hash: true
     } ),
     new CopyWebpackPlugin( [
-      { from: path.join( apps, '/api' ), to: 'api' },
-      { from: path.join( apps, '/images' ), to: 'images' },
-      { from: path.join( apps, '/fonts' ), to: 'fonts' },
-      { from: path.join( apps, '/sounds' ), to: 'sounds' }
+      { context: path.join( apps, '/public' ), from: '**/*', to: build }
     ] ),
     new webpack.HotModuleReplacementPlugin(),
     new UglifyJSPlugin()
