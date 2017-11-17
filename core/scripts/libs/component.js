@@ -1,100 +1,49 @@
-/* globals HTMLElement */
-
 'use strict'
 
 const utils = require( __dirname + '/../utils' )
+const Router = require( __dirname + '/router' )
 
 class Component {
   get template () {
     return ''
   }
 
-  get dependencies () {
-    return {}
-  }
+  stateChange ( url ) {}
 
-  init () {
-    return Promise.resolve()
-  }
+  execute () {}
 
-  execute () {
-    return Promise.resolve()
-  }
+  terminate () {}
 
-  terminate () {
-    return Promise.resolve()
-  }
+  constructor ( parent ) {
+    this.uid = utils.uid()
+    this.parent = parent
+    this.element = utils.html( this.template )
 
-  render () {
-    return this.init()
-      .then( () => {
-        return this.__renderComponents()
-      } )
-      .then( () => {
-        try {
-          this.parent.appendChild( this.html )
-        } catch ( e ) {}
-      } )
-      .then( () => {
-        return this.execute()
-      } )
-  }
+    this.parent.moduxComponent = this
 
-  __renderComponents () {
-    return this.__componentsWalk( ( element ) => {
-      return this.__renderComponent( element )
+    // Append element to the dom
+    this.parent.appendChild( this.element )
+
+    // Manage state change
+    this.__stateWatcher = Router.onStateChange( ( url ) => {
+      this.stateChange( url )
     } )
+
+    // Execute component
+    this.execute()
   }
 
-  __renderComponent ( element ) {
-    let name = element.getAttribute( 'data-component' )
-    // Check if the needed component exists in dependency list and not loaded
-    if ( !element.controller && ( name in this.dependencies ) ) {
-      element.controller = new this.dependencies[ name ]( element )
-      return element.controller.render()
-    }
-    return Promise.resolve()
+  static create ( parent ) {
+    return new this( parent )
   }
 
   destroy () {
-    return this.terminate()
-      .then( () => {
-        return this.__destroyComponents()
-      } )
-      .then( () => {
-        try {
-          delete this.parent.controller
-          this.html.remove()
-        } catch ( e ) {}
-      } )
-  }
-
-  __destroyComponents () {
-    return this.__componentsWalk( ( element ) => {
-      return this.__destroyComponent( element )
-    } )
-  }
-
-  __destroyComponent ( element ) {
-    if ( element.controller ) {
-      return element.controller.destroy()
-    }
-    return Promise.resolve()
-  }
-
-  __componentsWalk ( parser ) {
-    let iterations = []
-    if ( this.html instanceof HTMLElement ) {
-      utils.loop( this.html.querySelectorAll( '*[data-component]' ), ( container ) => {
-        iterations.push( parser( container ) )
-      } )
-    }
-    return Promise.all( iterations )
-  }
-
-  constructor ( parent ) {
-    this.parent = parent
-    this.html = utils.html( this.template )
+    this.__stateWatcher()
+    this.terminate()
+    try {
+      this.element.remove()
+    } catch ( e ) {}
+    delete this.parent.moduxComponent
   }
 }
 
