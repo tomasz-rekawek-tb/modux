@@ -44,6 +44,9 @@ Add your application to the `apps` folder, using a symlink. The application need
     Communication - A class used to make requests to the server
     Component - The base class of each custom component you build
     Config - A configuration instance for storing data
+    Module - A class used to create applications
     Router - The router class
     Store - A class used to communicate between components
+    
+    utils - A utility class
 ```
