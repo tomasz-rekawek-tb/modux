@@ -9,6 +9,7 @@ module.exports = {
   loader: require( __dirname + '/loader' ),
   logger: require( __dirname + '/logger' ),
   loop: require( __dirname + '/loop' ),
+  rnd: require( __dirname + '/rnd' ),
   setter: require( __dirname + '/setter' ),
   uid: require( __dirname + '/uid' )
 }
