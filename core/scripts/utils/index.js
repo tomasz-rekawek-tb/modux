@@ -2,6 +2,7 @@
 
 module.exports = {
   DateTime: require( __dirname + '/datetime' ),
+  device: require( __dirname + '/device' ),
   extend: require( __dirname + '/extend' ),
   getter: require( __dirname + '/getter' ),
   html: require( __dirname + '/html' ),
