@@ -24,7 +24,7 @@ class Communication {
       if ( self.__request.status === 200 ) {
         end( null, ev.target.responseText )
       } else {
-        end( self._request.status )
+        end( self.__request.status )
       }
     }
     if ( progress ) {
@@ -44,6 +44,10 @@ class Communication {
     div.firstChild.href = url // Ensures that the href is properly escaped
     div.innerHTML = div.innerHTML // Run the current innerHTML back through the parser
     return div.firstChild.href
+  }
+
+  cancel () {
+    this.__request.abort()
   }
 
   send ( url, method ) {
