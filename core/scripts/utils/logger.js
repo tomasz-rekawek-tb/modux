@@ -10,7 +10,7 @@ module.exports = {
   },
 
   enabled: ( enabled ) => {
-    debug = enabled
+    debug = enabled && console
   },
 
   log: function () {
