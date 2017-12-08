@@ -10,29 +10,29 @@ module.exports = {
   },
 
   enabled: ( enabled ) => {
-    debug = enabled && console
+    debug = enabled
   },
 
   log: function () {
-    if ( debug ) {
+    if ( debug && console ) {
       console.log.apply( this, [ id, ...arguments ] )
     }
   },
 
   info: function () {
-    if ( debug ) {
+    if ( debug && console ) {
       console.info.apply( this, [ id, ...arguments ] )
     }
   },
 
   warn: function () {
-    if ( debug ) {
+    if ( debug && console ) {
       console.warn.apply( this, [ id, ...arguments ] )
     }
   },
 
   error: function () {
-    if ( debug ) {
+    if ( debug && console ) {
       console.error.apply( this, [ id, ...arguments ] )
     }
   }
