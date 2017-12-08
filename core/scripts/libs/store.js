@@ -11,7 +11,7 @@ class Store {
       handler: listener
     }
     if ( showPreviousData && this.__data && this.__data[ eventname ] ) {
-      listener( this.__data )
+      listener( this.__data[ eventname ] )
     }
     return () => {
       delete this.__listeners[ id ]
