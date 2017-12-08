@@ -1,6 +1,7 @@
 'use strict'
 
 module.exports = {
+  cookie: require( __dirname + '/cookie' ),
   DateTime: require( __dirname + '/datetime' ),
   device: require( __dirname + '/device' ),
   extend: require( __dirname + '/extend' ),
@@ -11,6 +12,7 @@ module.exports = {
   logger: require( __dirname + '/logger' ),
   loop: require( __dirname + '/loop' ),
   rnd: require( __dirname + '/rnd' ),
+  scroll: require( __dirname + '/scroll' ),
   setter: require( __dirname + '/setter' ),
   uid: require( __dirname + '/uid' )
 }
