@@ -11,7 +11,7 @@ module.exports = ( env ) => {
   console.log( 'LOADING APPLICATION: ', env.app )
 
   let apps = path.join( __dirname, 'apps', env.app )
-  let build = path.join( __dirname, 'build' )
+  let build = path.join( __dirname, 'build', env.app )
 
   return {
     entry: {
