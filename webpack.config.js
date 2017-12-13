@@ -69,7 +69,7 @@ module.exports = ( env ) => {
       new ExtractTextPlugin( 'app.css' ),
       new HtmlWebpackPlugin( {
         template: path.join( apps, 'app.html' ),
-        hash: true
+        hash: false // Set to true in order to prevent css and js caching
       } ),
       new CopyWebpackPlugin( [
         { context: path.join( apps, '/public' ), from: '**/*', to: build }
