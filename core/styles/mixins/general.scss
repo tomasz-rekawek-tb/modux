@@ -1,0 +1,30 @@
+
+// General
+
+@mixin no-select() {
+    -webkit-user-select: none;
+    -moz-user-select   : none;
+    -ms-user-select    : none;
+    -o-user-select     : none;
+    user-select        : none;
+}
+
+@mixin hasTouch {
+    @media (hover: hover) {
+       @content;
+   }
+}
+
+// @include hasTouch {
+//     .nav-button:hover {
+//         background-color: $white;
+//         color: $black;
+//     }
+
+//     div.header-block:last-of-type {
+//         .header-item:hover {
+//             background-color: $white;
+//             color: $black;
+//         }
+//     }
+// }

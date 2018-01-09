@@ -30,7 +30,8 @@ module.exports = () => {
   }
 
   return {
-    type: () => { return device },
-    isDesktop: () => { return [ 'Windows', 'Linux', 'Macintosh' ].indexOf( device ) !== -1 }
+    type: () => device,
+    isDesktop: () => [ 'Windows', 'Linux', 'Macintosh' ].indexOf( device ) !== -1,
+    isMobile: () => [ 'Windows', 'Linux', 'Macintosh' ].indexOf( device ) === -1
   }
 }

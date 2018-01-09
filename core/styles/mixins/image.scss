@@ -1,0 +1,9 @@
+
+// Image proccessing
+
+@mixin filter($props) {
+    -webkit-filter: $props;
+    -moz-filter: $props;
+    -o-filter: $props;
+    filter: $props;
+}
