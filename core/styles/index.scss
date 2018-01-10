@@ -1,10 +1,1 @@
 @import 'mixins/index.scss';
-
-html, body {
-    margin: 0;
-    padding: 0;
-}
-
-section[data-component] {
-    display: inline-block;
-}

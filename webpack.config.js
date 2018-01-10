@@ -46,16 +46,48 @@ module.exports = ( env ) => {
           }
         },
         {
-          test: new RegExp( '^' + path.join( apps, 'app.scss' ) + '$', 'i' ),
+          test: /\.inline\.scss$/,
+          use: [
+            {
+              loader: 'style-loader/useable',
+              options: {
+                attrs: {
+                  id: '[name]'
+                }
+              }
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                url: false,
+                minimize: true
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                data: '@import "' + path.join( __dirname, 'core', 'styles', 'index.scss' ) + '";'
+              }
+            }
+          ]
+        },
+        {
+          test: /^((?!\.inline).)*\.scss$/,
           use: ExtractTextPlugin.extract( {
             use: [
               {
                 loader: 'css-loader',
                 options: {
-                  url: false
+                  url: false,
+                  minimize: true
                 }
               },
-              'sass-loader'
+              {
+                loader: 'sass-loader',
+                options: {
+                  data: '@import "' + path.join( __dirname, 'core', 'styles', 'index.scss' ) + '";'
+                }
+              }
             ]
           } )
         },
@@ -66,13 +98,17 @@ module.exports = ( env ) => {
       ]
     },
     plugins: [
-      new ExtractTextPlugin( 'app.css' ),
+      new webpack.DefinePlugin( {
+        'MODUX': '\'' + path.join( __dirname, 'core', 'scripts' ) + '\''
+      } ),
+      new ExtractTextPlugin( '[name].css' ),
       new HtmlWebpackPlugin( {
         template: path.join( apps, 'app.html' ),
+        inject: false,
         hash: false // Set to true in order to prevent css and js caching
       } ),
       new CopyWebpackPlugin( [
-        { context: path.join( apps, '/public' ), from: '**/*', to: build }
+        { context: path.join( apps, 'public' ), from: '**/*', to: build }
       ] ),
       new webpack.HotModuleReplacementPlugin(),
       new UglifyJSPlugin()
