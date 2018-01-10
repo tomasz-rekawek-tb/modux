@@ -1,43 +1,52 @@
 /* globals Image */
+
 'use strict'
 
-class Loader {
-  preloadImage ( url ) {
+function Loader () {
+  let cache = {}
+
+  this.preloadImage = ( url ) => {
     let img = new Image()
     return new Promise( ( resolve, reject ) => {
       img.onload = function () {
-        resolve( { obj: img, size: { width: this.width, height: this.height } } )
+        cache[ url ] = { image: img, width: this.width, height: this.height }
+        resolve( cache[ url ] )
       }
-      img.onerror = function () {
-        reject()
+      img.onerror = function ( err ) {
+        reject( err )
       }
       img.src = url
     } )
   }
 
-  preloadImages ( files, cb ) {
-    let loaded = {}
-    let nototal = Object.keys( files ).length
-    if ( nototal === 0 ) {
-      cb( nototal, nototal, null, null, null, true, {} )
-      return
-    }
-    let respond = ( key, img, url, result, size ) => {
-      loaded[ key ] = { url: url, loaded: result }
-      if ( typeof cb === 'function' ) {
-        cb( nototal, Object.keys( loaded ).length, key, img, url, result, size )
+  this.preload = ( files, progress, cb ) => {
+    let total = Object.keys( files ).length
+    let loaded = 0
+    let index = 0
+
+    let process = ( err, data, loaded, total ) => {
+      if ( typeof progress === 'function' ) {
+        progress( err, data, loaded, total )
+      }
+      index++
+      if ( total === index ) {
+        cb( loaded, total )
       }
     }
-    Object.keys( files ).forEach( ( key ) => {
-      this.preloadImage( files[ key ] )
+
+    Object.keys( files ).forEach( ( url ) => {
+      let type = files[ url ]
+      let loader = this['preload' + type.charAt( 0 ).toUpperCase() + type.slice( 1 ).toLowerCase() ]
+      loader( url )
         .then( ( data ) => {
-          respond( key, data.obj, files[ key ], true, data.size )
+          loaded++
+          process( null, data, loaded, total )
         } )
-        .catch( () => {
-          respond( key, null, files[ key ], false, {} )
+        .catch( ( err ) => {
+          process( err, null, loaded, total )
         } )
     } )
   }
 }
 
-module.exports = Loader
+module.exports = new Loader()
