@@ -24,9 +24,9 @@ function Loader () {
     let loaded = 0
     let index = 0
 
-    let process = ( err, data, loaded, total ) => {
+    let process = ( err, id, data, loaded, total ) => {
       if ( typeof progress === 'function' ) {
-        progress( err, data, loaded, total )
+        progress( err, id, data, loaded, total )
       }
       index++
       if ( total === index ) {
@@ -38,16 +38,16 @@ function Loader () {
       return cb( 0, 0 )
     }
 
-    Object.keys( files ).forEach( ( url ) => {
-      let type = files[ url ]
-      let loader = this['preload' + type.charAt( 0 ).toUpperCase() + type.slice( 1 ).toLowerCase() ]
-      loader( url )
+    Object.keys( files ).forEach( ( id ) => {
+      let file = files[ id ]
+      let loader = this[ 'preload' + file.type.charAt( 0 ).toUpperCase() + file.type.slice( 1 ).toLowerCase() ]
+      loader( file.url )
         .then( ( data ) => {
           loaded++
-          process( null, data, loaded, total )
+          process( null, id, data, loaded, total )
         } )
         .catch( ( err ) => {
-          process( err, null, loaded, total )
+          process( err, id, null, loaded, total )
         } )
     } )
   }
