@@ -34,6 +34,10 @@ function Loader () {
       }
     }
 
+    if ( total === 0 ) {
+      return cb( 0, 0 )
+    }
+
     Object.keys( files ).forEach( ( url ) => {
       let type = files[ url ]
       let loader = this['preload' + type.charAt( 0 ).toUpperCase() + type.slice( 1 ).toLowerCase() ]
