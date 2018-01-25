@@ -65,7 +65,7 @@ class Communication {
   }
 
   post ( url ) {
-    this.send( url, 'GET' )
+    this.send( url, 'POST' )
   }
 
   get ( url ) {
