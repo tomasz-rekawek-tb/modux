@@ -18,6 +18,10 @@ class Communication {
     } )
   }
 
+  setHeader ( name, value ) {
+    this.__request.setRequestHeader( name, value )
+  }
+
   listener ( progress, end ) {
     const self = this
     this.__request.onloadend = function ( ev ) {
