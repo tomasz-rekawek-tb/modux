@@ -6,6 +6,7 @@ class Communication {
   constructor ( form ) {
     this.__form = new FormData( form )
     this.__request = new XMLHttpRequest()
+    this.__headers = {}
   }
 
   addField ( key, value ) {
@@ -19,7 +20,7 @@ class Communication {
   }
 
   setHeader ( name, value ) {
-    this.__request.setRequestHeader( name, value )
+    this.__headers[ name ] = value
   }
 
   listener ( progress, end ) {
@@ -57,11 +58,14 @@ class Communication {
   send ( url, method ) {
     url = this.parseUrl( url )
     this.__request.open( method.toUpperCase(), url )
+    for ( let i = 0, k = Object.keys( this.__headers ), l = k.length; i < l; i++ ) {
+      this.__request.setRequestHeader( k[ i ], this.__headers[ k[ i ] ] )
+    }
     this.__request.send( this.__form )
   }
 
   post ( url ) {
-    this.send( url, 'POST' )
+    this.send( url, 'GET' )
   }
 
   get ( url ) {
