@@ -8,11 +8,11 @@ function Loader () {
   this.preloadImage = ( url ) => {
     let img = new Image()
     return new Promise( ( resolve, reject ) => {
-      img.onload = function () {
-        cache[ url ] = { image: img, width: this.width, height: this.height }
+      img.onload = () => {
+        cache[ url ] = img
         resolve( cache[ url ] )
       }
-      img.onerror = function ( err ) {
+      img.onerror = ( err ) => {
         reject( err )
       }
       img.src = url
