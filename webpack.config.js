@@ -10,8 +10,8 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' )
 module.exports = () => {
   console.log( 'LOADING APPLICATION' )
 
-  let apps = './'
-  let build = './build'
+  let apps = process.cwd()
+  let build = path.join( process.cwd(), 'build' )
 
   return {
     entry: {
