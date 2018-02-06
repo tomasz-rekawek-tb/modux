@@ -7,8 +7,13 @@ const CopyWebpackPlugin = require( 'copy-webpack-plugin' )
 const UglifyJSPlugin = require( 'uglifyjs-webpack-plugin' )
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' )
 
-module.exports = () => {
-  console.log( 'LOADING APPLICATION' )
+module.exports = ( env ) => {
+  let prod = false
+  if ( env.NODE_ENV === 'production' ) {
+    prod = true
+  }
+
+  console.log( 'LOADING APPLICATION - ' + ( ( prod ) ? 'PRODUCTION' : 'DEVELOPMENT' ) )
 
   let apps = process.cwd()
   let build = path.join( process.cwd(), 'build' )
@@ -60,7 +65,7 @@ module.exports = () => {
               loader: 'css-loader',
               options: {
                 url: false,
-                minimize: true
+                minimize: !!( prod )
               }
             },
             {
@@ -79,7 +84,7 @@ module.exports = () => {
                 loader: 'css-loader',
                 options: {
                   url: false,
-                  minimize: true
+                  minimize: !!( prod )
                 }
               },
               {
@@ -108,7 +113,7 @@ module.exports = () => {
         { context: path.join( apps, 'public' ), from: '**/*', to: build }
       ] ),
       new webpack.HotModuleReplacementPlugin(),
-      new UglifyJSPlugin()
+      ( ( prod ) ? new UglifyJSPlugin() : undefined )
     ]
   }
 }
