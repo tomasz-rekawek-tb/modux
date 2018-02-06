@@ -7,11 +7,11 @@ const CopyWebpackPlugin = require( 'copy-webpack-plugin' )
 const UglifyJSPlugin = require( 'uglifyjs-webpack-plugin' )
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' )
 
-module.exports = ( env ) => {
-  console.log( 'LOADING APPLICATION: ', env.app )
+module.exports = () => {
+  console.log( 'LOADING APPLICATION' )
 
-  let apps = path.join( __dirname, 'apps', env.app )
-  let build = path.join( __dirname, 'build', env.app )
+  let apps = './'
+  let build = './build'
 
   return {
     entry: {
@@ -66,7 +66,7 @@ module.exports = ( env ) => {
             {
               loader: 'sass-loader',
               options: {
-                data: '@import "' + path.join( __dirname, 'core', 'styles', 'index.scss' ) + '";'
+                data: '@import "' + path.join( __dirname, 'styles', 'index.scss' ) + '";'
               }
             }
           ]
@@ -85,7 +85,7 @@ module.exports = ( env ) => {
               {
                 loader: 'sass-loader',
                 options: {
-                  data: '@import "' + path.join( __dirname, 'core', 'styles', 'index.scss' ) + '";'
+                  data: '@import "' + path.join( __dirname, 'styles', 'index.scss' ) + '";'
                 }
               }
             ]
@@ -98,9 +98,6 @@ module.exports = ( env ) => {
       ]
     },
     plugins: [
-      new webpack.DefinePlugin( {
-        'MODUX': '\'' + path.join( __dirname, 'core', 'scripts' ) + '\''
-      } ),
       new ExtractTextPlugin( '[name].css' ),
       new HtmlWebpackPlugin( {
         template: path.join( apps, 'app.html' ),
