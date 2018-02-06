@@ -7,9 +7,9 @@ const CopyWebpackPlugin = require( 'copy-webpack-plugin' )
 const UglifyJSPlugin = require( 'uglifyjs-webpack-plugin' )
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' )
 
-module.exports = ( env ) => {
+module.exports = () => {
   let prod = false
-  if ( env.NODE_ENV === 'production' ) {
+  if ( process.env.NODE_ENV === 'production' ) {
     prod = true
   }
 
