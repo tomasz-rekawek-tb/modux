@@ -13,6 +13,23 @@ module.exports = () => {
     prod = true
   }
 
+  let plugins = [
+    new ExtractTextPlugin( '[name].css' ),
+    new HtmlWebpackPlugin( {
+      template: path.join( apps, 'app.html' ),
+      inject: false,
+      hash: false // Set to true in order to prevent css and js caching
+    } ),
+    new CopyWebpackPlugin( [
+      { context: path.join( apps, 'public' ), from: '**/*', to: build }
+    ] ),
+    new webpack.HotModuleReplacementPlugin()
+  ]
+
+  if ( prod ) {
+    plugins.push( new UglifyJSPlugin() )
+  }
+
   console.log( 'LOADING APPLICATION - ' + ( ( prod ) ? 'PRODUCTION' : 'DEVELOPMENT' ) )
 
   let apps = process.cwd()
@@ -102,18 +119,6 @@ module.exports = () => {
         }
       ]
     },
-    plugins: [
-      new ExtractTextPlugin( '[name].css' ),
-      new HtmlWebpackPlugin( {
-        template: path.join( apps, 'app.html' ),
-        inject: false,
-        hash: false // Set to true in order to prevent css and js caching
-      } ),
-      new CopyWebpackPlugin( [
-        { context: path.join( apps, 'public' ), from: '**/*', to: build }
-      ] ),
-      new webpack.HotModuleReplacementPlugin(),
-      ( ( prod ) ? new UglifyJSPlugin() : undefined )
-    ]
+    plugins: plugins
   }
 }
