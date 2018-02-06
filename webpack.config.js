@@ -13,6 +13,11 @@ module.exports = () => {
     prod = true
   }
 
+  let apps = process.cwd()
+  let build = path.join( process.cwd(), 'build' )
+
+  console.log( 'LOADING APPLICATION - ' + ( ( prod ) ? 'PRODUCTION' : 'DEVELOPMENT' ) )
+
   let plugins = [
     new ExtractTextPlugin( '[name].css' ),
     new HtmlWebpackPlugin( {
@@ -29,11 +34,6 @@ module.exports = () => {
   if ( prod ) {
     plugins.push( new UglifyJSPlugin() )
   }
-
-  console.log( 'LOADING APPLICATION - ' + ( ( prod ) ? 'PRODUCTION' : 'DEVELOPMENT' ) )
-
-  let apps = process.cwd()
-  let build = path.join( process.cwd(), 'build' )
 
   return {
     entry: {
