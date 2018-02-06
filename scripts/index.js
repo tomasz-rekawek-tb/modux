@@ -20,7 +20,5 @@ module.exports = {
   store: store,
   utils: utils,
 
-  Module: Module,
-
-  WEBPACK_CONFIG: require( __dirname + '/../webpack.config.js' )
+  Module: Module
 }
