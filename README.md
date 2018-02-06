@@ -1,42 +1,23 @@
 # modux
 A framework used in front end application creation
 
-## Running
+## Installation
 
-Testing an application
 ```
-npm test -- --env.app=APPLICATION_NAME
-```
-
-Building an application
-```
-npm run build -- --env.app=APPLICATION_NAME
+npm install CrispCode/modux#master --save-dev
 ```
 
 ## How to use
 
-Clone the `modux` repository:
+Add to your package.json scripts:
 ```
-git clone https://github.com/CrispCode/modux.git
-```
-
-Add your application to the `apps` folder, using a symlink. The application needs to have the following directory structure
-```
-    app/
-        /api
-        /fonts
-        /images
-        /scripts
-        /sounds
-        /styles
-        app.html
-        app.js
-        app.scss
-        modux.js
-        modux.scss
+  "scripts": {
+    "test": "NODE_ENV=development ./node_modules/.bin/webpack-dev-server --open --config ./node_modules/modux/webpack.config.js",
+    "build": "NODE_ENV=production ./node_modules/.bin/webpack --config ./node_modules/modux/webpack.config.js"
+  }
 ```
 
-`modux.js` and `modux.scss` need to load the core js and scss files so that everything you use internally will reference these files instead of external core directory
+To run use: `npm test` or `npm run build`
 
 ### Modux classes
 
