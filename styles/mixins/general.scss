@@ -10,12 +10,18 @@
 }
 
 @mixin hasTouch {
+    @media not all and (hover: hover) {
+       @content;
+   }
+}
+
+@mixin hasHover {
     @media (hover: hover) {
        @content;
    }
 }
 
-// @include hasTouch {
+// @include hasHover {
 //     .nav-button:hover {
 //         background-color: $white;
 //         color: $black;
