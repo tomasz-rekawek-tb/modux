@@ -65,7 +65,14 @@ module.exports = () => {
           exclude: [ /node_modules/ ],
           include: [ __dirname ],
           query: {
-            presets: [ 'env' ]
+            presets: [ "env", {
+              "targets": {
+                "ie": "> 9"
+              },
+              "modules": false,
+              "useBuiltIns": true,
+              "debug": true
+            }]
           }
         },
         {
