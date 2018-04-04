@@ -38,7 +38,6 @@ class Router {
   static onStateChange ( listener ) {
     let id = utils.uid()
     listeners[ id ] = listener
-    listener( location.pathname + location.search + location.hash )
     return () => {
       delete listeners[ id ]
     }
