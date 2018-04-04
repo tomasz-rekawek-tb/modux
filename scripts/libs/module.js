@@ -21,9 +21,6 @@ let modules = {}
 
 class Module {
   addDependency ( name, dependency ) {
-    if ( !Component.isPrototypeOf( dependency ) ) {
-      throw new Error( name + ' is not a component' )
-    }
     this.__dependencies[ name ] = dependency
     return this
   }
