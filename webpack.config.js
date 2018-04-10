@@ -28,6 +28,7 @@ module.exports = () => {
     new CopyWebpackPlugin( [
       { context: path.join( apps, 'public' ), from: '**/*', to: build }
     ] ),
+    new webpack.DefinePlugin({ 'ENVIRONMENT': prod }),
     new webpack.HotModuleReplacementPlugin()
   ]
 
