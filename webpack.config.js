@@ -28,7 +28,7 @@ module.exports = () => {
     new CopyWebpackPlugin( [
       { context: path.join( apps, 'public' ), from: '**/*', to: build }
     ] ),
-    new webpack.DefinePlugin({ 'PRODUCTION': prod }),
+    new webpack.DefinePlugin( { 'PRODUCTION': prod } ),
     new webpack.HotModuleReplacementPlugin()
   ]
 
@@ -62,19 +62,19 @@ module.exports = () => {
       loaders: [
         {
           test: /\.js$/,
-          //exclude: [ /node_modules/ ],
+          // exclude: [ /node_modules/ ],
           use: [
             {
               loader: 'babel-loader',
               options: {
-                presets: [ 
+                presets: [
                   'env'
                 ],
                 'plugins': [
-                  [ 'transform-es2015-classes', { 'loose': false } ]
+                  [ 'transform-es2015-classes', { 'loose': true } ]
                 ]
               }
-             }
+            }
           ]
         },
         {
