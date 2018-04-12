@@ -19,8 +19,6 @@ class Component {
     this.parent = parent
     this.element = utils.html( this.template )
 
-    this.parent.moduxComponent = this
-
     // Append element to the dom
     this.parent.appendChild( this.element )
 

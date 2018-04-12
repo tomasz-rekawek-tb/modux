@@ -37,7 +37,7 @@ class Module {
 
   __createComponent ( element, Component ) {
     if ( !element.moduxComponent ) {
-      ( new Component( element ) )()
+      element.moduxComponent = new Component( element )
     }
   }
 
@@ -121,6 +121,7 @@ class Module {
       throw new Error( 'Initial component cannot be found in dependency list' )
     }
     this.component = new this.__dependencies[ component ]( element )
+    element.moduxComponent = this.component
   }
 
   destroy () {
