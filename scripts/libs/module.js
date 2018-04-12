@@ -3,7 +3,6 @@
 'use strict'
 
 const utils = require( __dirname + '/../utils' )
-const Component = require( __dirname + '/component' )
 const Router = require( __dirname + '/router' )
 
 const _attrComponent = 'data-modux-component'
@@ -38,7 +37,7 @@ class Module {
 
   __createComponent ( element, Component ) {
     if ( !element.moduxComponent ) {
-      Component.create( element )
+      ( new Component( element ) )()
     }
   }
 
@@ -121,7 +120,7 @@ class Module {
     if ( !this.__dependencies[ component ] ) {
       throw new Error( 'Initial component cannot be found in dependency list' )
     }
-    this.component = this.__dependencies[ component ].create( element )
+    this.component = new this.__dependencies[ component ]( element )
   }
 
   destroy () {

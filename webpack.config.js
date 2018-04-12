@@ -68,27 +68,14 @@ module.exports = () => {
               loader: 'babel-loader',
               options: {
                 presets: [ 
-                  "env"
+                  'env'
+                ],
+                'plugins': [
+                  [ 'transform-es2015-classes', { 'loose': false } ]
                 ]
               }
              }
           ]
-        },
-        {
-          test: /\.js$/,
-          loader: 'babel-loader',
-          exclude: [ /node_modules/ ],
-          include: [ __dirname ],
-          query: {
-            presets: [ "env", {
-              "targets": {
-                "ie": "> 9"
-              },
-              "modules": false,
-              "useBuiltIns": true,
-              "debug": true
-            }]
-          }
         },
         {
           test: /\.inline\.scss$/,

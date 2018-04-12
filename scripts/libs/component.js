@@ -33,10 +33,6 @@ class Component {
     this.execute()
   }
 
-  static create ( parent ) {
-    return new this( parent )
-  }
-
   destroy () {
     this.__stateWatcher()
     this.terminate()
