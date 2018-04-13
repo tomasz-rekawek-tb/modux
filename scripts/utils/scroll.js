@@ -1,15 +1,19 @@
-/* globals window, document, requestAnimationFrame */
+/* globals window, requestAnimationFrame */
 
 'use strict'
 
-let scrollToTop = ( position, speed ) => {
-  position = position || window.scrollY
+let scrollTo = ( x, y, speed ) => {
+  let positionX = window.scrollX
+  let positionY = window.scrollY
   speed = speed || 100
   let scroll = () => {
-    let limit = Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight )
-    if ( position > 0 ) {
-      position -= limit * speed / 100
-      window.scrollTo( 0, position )
+    let limitX = Math.abs( positionX - x )
+    let limitY = Math.abs( positionY - y )
+    positionX = positionX + ( ( x - positionX ) / Math.abs( x - positionX ) ) * ( limitX * speed / 100 )
+    positionY = positionY + ( ( y - positionY ) / Math.abs( y - positionY ) ) * ( limitY * speed / 100 )
+
+    if ( parseInt( positionX ) !== parseInt( x ) && parseInt( positionY ) !== parseInt( y ) ) {
+      window.scrollTo( positionX, positionY )
       requestAnimationFrame( scroll )
     }
   }
@@ -17,5 +21,8 @@ let scrollToTop = ( position, speed ) => {
 }
 
 module.exports = {
-  scrollToTop: scrollToTop
+  scrollToTop: ( speed ) => {
+    scrollTo( 0, 0, speed )
+  },
+  scrollTo: scrollTo
 }
