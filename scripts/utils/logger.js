@@ -14,26 +14,34 @@ module.exports = {
   },
 
   log: function () {
-    if ( debug && console && console.log ) {
-      console.log.apply( this, [ id, ...arguments ] )
+    if ( debug ) {
+      try {
+        console.log.apply( this, [ id, ...arguments ] )
+      } catch ( e ) {}
     }
   },
 
   info: function () {
-    if ( debug && console && console.info ) {
-      console.info.apply( this, [ id, ...arguments ] )
+    if ( debug ) {
+      try {
+        console.info.apply( this, [ id, ...arguments ] )
+      } catch ( e ) {}
     }
   },
 
   warn: function () {
-    if ( debug && console && console.warn ) {
-      console.warn.apply( this, [ id, ...arguments ] )
+    if ( debug ) {
+      try {
+        console.warn.apply( this, [ id, ...arguments ] )
+      } catch ( e ) {}
     }
   },
 
   error: function () {
-    if ( debug && console && console.error ) {
-      console.error.apply( this, [ id, ...arguments ] )
+    if ( debug ) {
+      try {
+        console.error.apply( this, [ id, ...arguments ] )
+      } catch ( e ) {}
     }
   }
 }
