@@ -42,3 +42,4 @@ To run use: `npm test` or `npm run build`
 6. Add polyfill incorporation
 7. Add documentation
 8. Publish to NPM
+9. Add boilerplate command line
