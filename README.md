@@ -44,3 +44,4 @@ To run use: `npm test` or `npm run build`
 8. Publish to NPM
 9. Add boilerplate command line
 10. Update scroll to support overflow containers
+11. Make sure utils.uid returns unique for any number of results - use memoisation that resets on timestamp change
