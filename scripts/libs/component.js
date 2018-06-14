@@ -14,10 +14,13 @@ class Component {
 
   terminate () {}
 
-  constructor ( parent ) {
+  constructor ( parent, config, store ) {
     this.uid = utils.uid()
     this.parent = parent
     this.element = utils.html( this.template )
+
+    this.config = config
+    this.store = store
 
     // Append element to the dom
     this.parent.appendChild( this.element )

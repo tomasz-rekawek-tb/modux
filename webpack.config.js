@@ -37,6 +37,8 @@ module.exports = () => {
   }
 
   return {
+    mode: ( prod ) ? 'production' : 'development',
+
     entry: {
       app: [
         path.join( apps, 'app.js' )
@@ -59,7 +61,7 @@ module.exports = () => {
       symlinks: false
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.js$/,
           // exclude: [ /node_modules/ ],

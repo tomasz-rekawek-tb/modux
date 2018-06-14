@@ -5,6 +5,9 @@
 const utils = require( __dirname + '/../utils' )
 const Router = require( __dirname + '/router' )
 
+const config = require( __dirname + '/config' )
+const store = require( __dirname + '/store' )
+
 const _attrComponent = 'data-modux-component'
 const _attrLink = 'data-modux-link'
 
@@ -15,8 +18,6 @@ const linkHandler = function ( e ) {
     e.preventDefault()
   }
 }
-
-let modules = {}
 
 class Module {
   addDependency ( name, dependency ) {
@@ -33,11 +34,13 @@ class Module {
   constructor ( name ) {
     this.__name = name
     this.__dependencies = {}
+    this.__config = config.create()
+    this.__store = store.create()
   }
 
   __createComponent ( element, Component ) {
     if ( !element.moduxComponent ) {
-      element.moduxComponent = new Component( element )
+      element.moduxComponent = new Component( element, this.__config, this.__store )
     }
   }
 
@@ -120,27 +123,13 @@ class Module {
     if ( !this.__dependencies[ component ] ) {
       throw new Error( 'Initial component cannot be found in dependency list' )
     }
-    this.component = new this.__dependencies[ component ]( element )
+    this.component = new this.__dependencies[ component ]( element, this.__config, this.__store )
     element.moduxComponent = this.component
   }
 
   destroy () {
     this.component.destroy()
     this.__htmlWatcher.disconnect()
-    delete modules[ this.__name ]
-  }
-
-  static create ( name ) {
-    modules[ name ] = new this( name )
-    return modules[ name ]
-  }
-  static get ( name ) {
-    return modules[ name ]
-  }
-  static remove ( name ) {
-    if ( modules[ name ] ) {
-      modules[ name ].destroy()
-    }
   }
 }
 

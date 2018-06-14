@@ -3,8 +3,12 @@
 const utils = require( __dirname + '/../utils' )
 
 class Store {
-  static on ( eventname, listener, showPreviousData ) {
-    this.__listeners = this.__listeners || {}
+  constructor () {
+    this.__listeners = {}
+    this.__data = {}
+  }
+
+  on ( eventname, listener, showPreviousData ) {
     let id = utils.uid()
     this.__listeners[ id ] = {
       eventname: eventname,
@@ -18,8 +22,7 @@ class Store {
     }
   }
 
-  static emit ( eventname, value ) {
-    this.__data = this.__data || {}
+  emit ( eventname, value ) {
     this.__data[ eventname ] = value
     utils.loop( this.__listeners, ( data ) => {
       if ( data.eventname === eventname ) {
@@ -27,6 +30,11 @@ class Store {
       }
     } )
   }
+
+  create () {
+    return new Store()
+  }
 }
 
-module.exports = Store
+let store = new Store()
+module.exports = store

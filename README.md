@@ -31,17 +31,3 @@ To run use: `npm test` or `npm run build`
     
     utils - A utility class
 ```
-
-### TODO
-
-1. Add wrapped modules
-2. Add Store and Config instances for module
-3. Add Store and Config instance ref to each component
-4. Update webpack and dependencies
-5. Add css selector shorthand
-6. Add polyfill incorporation
-7. Add documentation
-8. Publish to NPM
-9. Add boilerplate command line
-10. Update scroll to support overflow containers
-11. Make sure utils.uid returns unique for any number of results - use memoisation that resets on timestamp change
