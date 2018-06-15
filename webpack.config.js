@@ -130,7 +130,7 @@ module.exports = () => {
           loader: 'raw-loader'
         },
         {
-          test: /\.(glsl)$/i,
+          test: /\.(frag)$/i,
           loader: 'raw-loader'
         }
       ]
