@@ -128,6 +128,10 @@ module.exports = () => {
         {
           test: /\.(html)$/i,
           loader: 'raw-loader'
+        },
+        {
+          test: /\.(glsl)$/i,
+          loader: 'raw-loader'
         }
       ]
     },
