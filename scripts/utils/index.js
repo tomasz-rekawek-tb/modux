@@ -1,6 +1,7 @@
 'use strict'
 
 module.exports = {
+  approx: require( __dirname + '/approx' ),
   cookie: require( __dirname + '/cookie' ),
   DateTime: require( __dirname + '/datetime' ),
   device: require( __dirname + '/device' ),
