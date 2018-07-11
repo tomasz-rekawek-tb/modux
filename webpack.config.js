@@ -55,7 +55,28 @@ module.exports = () => {
       host: '0.0.0.0',
       port: 8080,
       contentBase: build,
-      historyApiFallback: true
+      historyApiFallback: true,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+      },
+      setup: ( app ) => {
+        // Allow all requests
+        app.post( '*', ( req, res ) => {
+          res.redirect( req.originalUrl )
+        } )
+        app.put( '*', ( req, res ) => {
+          res.redirect( req.originalUrl )
+        } )
+        app.delete( '*', ( req, res ) => {
+          res.redirect( req.originalUrl )
+        } )
+        app.options( '*', ( req, res ) => {
+          res.redirect( req.originalUrl )
+        } )
+      }
     },
     resolve: {
       symlinks: false
