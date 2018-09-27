@@ -3,6 +3,6 @@
 
 module.exports = ( text ) => {
   let container = document.createElement( 'section' )
-  container.innerHTML = text
+  container.innerHTML = text.trim()
   return container.firstChild
 }

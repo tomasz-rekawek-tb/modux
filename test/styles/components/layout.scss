@@ -2,10 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
 
-    h1 {
-        color: #fff;
-        font-family: 'arial';
+    .container {
+        display: block;
+        width: 90%;
+        max-width: 500px;
     }
 }

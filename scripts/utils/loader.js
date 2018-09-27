@@ -1,16 +1,25 @@
-/* globals Image */
+/* globals XMLHttpRequest, Image, Audio */
 
 'use strict'
 
-function Loader () {
-  let cache = {}
+const loop = require( './loop' )
+const isObject = require( './isobject' )
 
-  this.preloadImage = ( url ) => {
+class Loader {
+  constructor () {
+    this._cache = {}
+  }
+
+  static create () {
+    return new Loader()
+  }
+
+  preloadImage ( url ) {
     let img = new Image()
     return new Promise( ( resolve, reject ) => {
       img.onload = () => {
-        cache[ url ] = img
-        resolve( cache[ url ] )
+        this._cache[ url ] = img
+        resolve( this._cache[ url ] )
       }
       img.onerror = ( err ) => {
         reject( err )
@@ -19,38 +28,74 @@ function Loader () {
     } )
   }
 
-  this.preload = ( files, progress, cb ) => {
-    let total = Object.keys( files ).length
-    let loaded = 0
-    let index = 0
-
-    let process = ( err, id, data, loaded, total ) => {
-      if ( typeof progress === 'function' ) {
-        progress( err, id, data, loaded, total )
+  preloadAudio ( url ) {
+    let audio = new Audio()
+    return new Promise( ( resolve, reject ) => {
+      audio.addEventListener( 'canplay', () => {
+        this._cache[ url ] = audio
+        resolve( this._cache[ url ] )
+      } )
+      audio.onerror = ( err ) => {
+        reject( err )
       }
-      index++
-      if ( total === index ) {
-        cb( loaded, total )
+      audio.src = url
+    } )
+  }
+
+  preloadFile ( url ) {
+    let xhr = new XMLHttpRequest()
+    return new Promise( ( resolve, reject ) => {
+      xhr.open( 'GET', url )
+      xhr.onload = () => {
+        this._cache[ url ] = url
+        resolve( this._cache[ url ] )
       }
-    }
+      xhr.onerror = ( err ) => {
+        reject( err )
+      }
+      xhr.send()
+    } )
+  }
 
-    if ( total === 0 ) {
-      return cb( 0, 0 )
-    }
+  preload ( files, progress ) {
+    return new Promise( ( resolve ) => {
+      let total = Object.keys( files ).length
+      let loaded = 0
+      let index = 0
 
-    Object.keys( files ).forEach( ( id ) => {
-      let file = files[ id ]
-      let loader = this[ 'preload' + file.type.charAt( 0 ).toUpperCase() + file.type.slice( 1 ).toLowerCase() ]
-      loader( file.url )
-        .then( ( data ) => {
-          loaded++
-          process( null, id, data, loaded, total )
-        } )
-        .catch( ( err ) => {
-          process( err, id, null, loaded, total )
-        } )
+      let process = ( err, id, data, loaded, total ) => {
+        if ( typeof progress === 'function' ) {
+          progress( err, id, data, loaded, total )
+        }
+        index++
+        if ( total === index ) {
+          resolve( total - loaded )
+        }
+      }
+
+      if ( total === 0 ) {
+        return resolve( 0 )
+      }
+
+      loop( files, ( file, id ) => {
+        let type = 'file'
+        let url = file
+        if ( isObject( file ) ) {
+          type = file.type
+          url = file.url
+        }
+        let loader = this[ 'preload' + type.charAt( 0 ).toUpperCase() + type.slice( 1 ).toLowerCase() ]
+        loader.call( this, url )
+          .then( ( data ) => {
+            loaded++
+            process( null, id, data, loaded, total )
+          } )
+          .catch( ( err ) => {
+            process( err, id, null, loaded, total )
+          } )
+      } )
     } )
   }
 }
 
-module.exports = new Loader()
+module.exports = Loader.create()

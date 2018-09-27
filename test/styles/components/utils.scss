@@ -1,0 +1,66 @@
+.utils {
+    display: block;
+    border: 1px solid #000;
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    color: #333;
+    background-color: #efefef;
+    margin-bottom: 1em;
+
+    .title {
+        font-family: 'arial';
+        font-weight: bold;
+        font-size: 1.2em;
+        cursor: pointer;
+
+        .text {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .status {
+            display: inline-block;
+            vertical-align: top;
+            width: 1em;
+            height: 1em;
+            border: 1px solid #666;
+            margin-right: 1em;    
+            background-color: #CC3;
+
+            &.success {
+                background-color: #3C3;
+            }
+            &.error {
+                background-color: #F66;
+            }
+        }
+    }
+
+    .details {
+
+        .features {
+            font-family: 'arial';
+
+            li {
+                list-style: none;
+                color: #fff;
+                padding: 0.5em;
+                margin: 2px;
+                box-sizing: border-box;
+                background-color: #CC3;
+
+                .output {
+                    padding-left: 4em;
+                }
+
+                &.error {
+                    background-color: #F66;
+                }
+                &.success {
+                    background-color: #3C3;
+                }
+            }
+        }
+    }
+}

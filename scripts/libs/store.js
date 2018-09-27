@@ -15,18 +15,21 @@ class Store {
       handler: listener
     }
     if ( showPreviousData && this.__data && this.__data[ eventname ] ) {
-      listener( this.__data[ eventname ] )
+      listener.apply( listener, this.__data[ eventname ] )
     }
     return () => {
       delete this.__listeners[ id ]
     }
   }
 
-  emit ( eventname, value ) {
-    this.__data[ eventname ] = value
+  emit () {
+    let values = Array.prototype.slice.call( arguments )
+    let eventname = values.shift()
+
+    this.__data[ eventname ] = values
     utils.loop( this.__listeners, ( data ) => {
       if ( data.eventname === eventname ) {
-        data.handler( value )
+        data.handler.apply( data.handler, values )
       }
     } )
   }

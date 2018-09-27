@@ -1,0 +1,50 @@
+/* globals document */
+'use strict'
+
+const html = require( './html' )
+
+let createContainer = ( name ) => {
+  let e = html( `
+    <span id="modux-font-` + name + `" style="position: absolute; top: -500px">
+      abcdefghijklmnopqrstuvwxyz
+      1234567890
+      ABCDEFGHIGKLMNOPQRSTUVWXYZ
+      !? -_
+    </span>
+  ` )
+  return e
+}
+
+let createBlankFont = () => {
+  let e = html( `
+  <style>
+    @font-face {
+      font-family: "Adobe Blank";
+      src: url("data:application/font-woff;base64,d09GRgABAAAAAARIABEAAAAABdwAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAABgAAAABsAAAAcaLMRlEdERUYAAAGcAAAAHQAAACAAMAAET1MvMgAAAbwAAABJAAAAVlXgZ5BjbWFwAAACCAAAAEIAAAFKAC0DsGN2dCAAAAJMAAAABAAAAAQAIQJ5Z2FzcAAAAlAAAAAIAAAACP//AANnbHlmAAACWAAAAFQAAABUPaWWPmhlYWQAAAKsAAAAMAAAADb9ErJRaGhlYQAAAtwAAAAeAAAAJAT2A3RobXR4AAAC/AAAAAwAAAAMC7gAIWxvY2EAAAMIAAAACAAAAAgAKgBUbWF4cAAAAxAAAAAfAAAAIABHADluYW1lAAADMAAAALoAAAGEGgY1yXBvc3QAAAPsAAAAKgAAADcc+EvmdmhlYQAABBgAAAAgAAAAJAItE0N2bXR4AAAEOAAAAAgAAAAIA+gCmndlYmYAAARAAAAABgAAAAYG6lIVeNpjYGBgZACCM7aLzoPoc1bbE6B0CgBKMwa+AHjaY2BkYGDgA2IJBhBgYmAEQhDJAuYxAAAEYAA1AAAAeNpjYGR+wTiBgZWBhamLaQ8DA0MPhGZ8wGDIyMTAwMTAyswAB0ABBhYoOyDNNYXBgYGXgZdZ4b8FQxRzAUMFUJgRJAcA60YKJQAAAHjaY2BgYGaAYBkGRgYQcAHyGMF8FgYNIM0GpBkZmIAs3v//wSpANOP/r1D1QMDIxgDnMIJUMjGgAkaGYQ8AgK0G2wAAACECeQAAAAH//wACAAIAIQAAASoCmgADAAcALrEBAC88sgcEAO0ysQYF3DyyAwIA7TIAsQMALzyyBQQA7TKyBwYB/DyyAQIA7TIzESERJzMRIyEBCejHxwKa/WYhAlgAeNpjYGRgYABib3UXqXh+m68M9swvgCIM56y2Z8JpRaASLaZZQC4HAxNIFAAEsAjeeNpjYGRgYC7438EQxfyCAQgYtRgYGVABMwBfOwNwAAAD6AAhA+gAAAPoAAAAAAAqACoAKnjaY2BkYGBgZuBgYGIAARDJyAASc2DQAwkAAARmAIEAeNqFkE0OwVAUhb9SwgYMm47EhGgRdMbAEhhriggh8TOzHKuwAnZgFdbgtL0MGbzck/Pz7nkPqLCkiONWcfDAcEG8Z7jIlLphlwYXwyVqXA2X5b4Zvot/Gn7Q5sWIhD0xC8ZsmbNjQ5NQWpfhd07k2XHK5oGV3L60llSfSOf3LbknJBA3MD6g8zf1QVM5DhxZZy18ZdPNv9Mz8bH+L+/9yaRskvU96xV5p1TrqmGobhE9+rZZDd+rAy/wAAB42mNgYgCD/80MRkCKkQEdMAMFmRiZ2dJzKgsyDNlL8zINDAxcAHY1BkQAAHjaY2AUYPhv9o+HIYr5BQMDox/TLAYgxYAMGAF6hwSDA+gCmgAAAAAAAVIVBukAAA==") format("woff");
+    }
+  </style>
+  ` )
+  return e
+}
+
+module.exports = ( font, interval ) => {
+  let blank = createBlankFont()
+  document.getElementsByTagName( 'head' )[0].appendChild( blank )
+
+  let container = createContainer( font )
+  document.body.appendChild( container )
+
+  container.style.fontFamily = '"' + font + '", "Adobe Blank"'
+
+  return new Promise( ( resolve ) => {
+    let timer = () => {
+      if ( container.offsetWidth > 0 ) {
+        container.parentNode.removeChild( container )
+        resolve()
+      } else {
+        setTimeout( timer, interval || 100 )
+      }
+    }
+    timer()
+  } )
+}

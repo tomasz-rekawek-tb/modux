@@ -5,13 +5,14 @@ const webpack = require( 'webpack' )
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' )
 const CopyWebpackPlugin = require( 'copy-webpack-plugin' )
 const UglifyJSPlugin = require( 'uglifyjs-webpack-plugin' )
-const ExtractTextPlugin = require( 'extract-text-webpack-plugin' )
+const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' )
 
 module.exports = () => {
   let prod = false
   if ( process.env.NODE_ENV === 'production' ) {
     prod = true
   }
+  prod = true
 
   let apps = process.cwd()
   let build = path.join( process.cwd(), 'build' )
@@ -19,7 +20,7 @@ module.exports = () => {
   console.log( 'LOADING APPLICATION - ' + ( ( prod ) ? 'PRODUCTION' : 'DEVELOPMENT' ) )
 
   let plugins = [
-    new ExtractTextPlugin( '[name].css' ),
+    new MiniCssExtractPlugin( { filename: '[name].css' } ),
     new HtmlWebpackPlugin( {
       template: path.join( apps, 'app.html' ),
       inject: false,
@@ -62,7 +63,7 @@ module.exports = () => {
         'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With',
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
       },
-      setup: ( app ) => {
+      before: ( app ) => {
         // Allow all requests
         app.post( '*', ( req, res ) => {
           res.redirect( req.originalUrl )
@@ -85,16 +86,12 @@ module.exports = () => {
       rules: [
         {
           test: /\.js$/,
-          // exclude: [ /node_modules/ ],
           use: [
             {
               loader: 'babel-loader',
               options: {
                 presets: [
-                  'env'
-                ],
-                'plugins': [
-                  [ 'transform-es2015-classes', { 'loose': true } ]
+                  '@babel/preset-env'
                 ]
               }
             }
@@ -104,12 +101,7 @@ module.exports = () => {
           test: /\.inline\.scss$/,
           use: [
             {
-              loader: 'style-loader/useable',
-              options: {
-                attrs: {
-                  id: '[name]'
-                }
-              }
+              loader: 'style-loader/useable'
             },
             {
               loader: 'css-loader',
@@ -128,23 +120,24 @@ module.exports = () => {
         },
         {
           test: /^((?!\.inline).)*\.scss$/,
-          use: ExtractTextPlugin.extract( {
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  url: false,
-                  minimize: !!( prod )
-                }
-              },
-              {
-                loader: 'sass-loader',
-                options: {
-                  data: '@import "' + path.join( __dirname, 'styles', 'index.scss' ) + '";'
-                }
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                url: false,
+                minimize: !!( prod )
               }
-            ]
-          } )
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                data: '@import "' + path.join( __dirname, 'styles', 'index.scss' ) + '";'
+              }
+            }
+          ]
         },
         {
           test: /\.(html)$/i,
