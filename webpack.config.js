@@ -149,6 +149,9 @@ module.exports = () => {
         }
       ]
     },
-    plugins: plugins
+    plugins: plugins,
+    performance: {
+      hints: ( prod ) ? false : 'warning'
+    }
   }
 }
