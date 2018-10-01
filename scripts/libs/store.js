@@ -14,7 +14,7 @@ class Store {
       eventname: eventname,
       handler: listener
     }
-    if ( showPreviousData && this.__data && this.__data[ eventname ] ) {
+    if ( showPreviousData && this.__data && this.__data[ eventname ] !== undefined ) {
       listener.apply( listener, this.__data[ eventname ] )
     }
     return () => {
