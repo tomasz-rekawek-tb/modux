@@ -12,7 +12,6 @@ module.exports = () => {
   if ( process.env.NODE_ENV === 'production' ) {
     prod = true
   }
-  prod = true
 
   let apps = process.cwd()
   let build = path.join( process.cwd(), 'build' )
