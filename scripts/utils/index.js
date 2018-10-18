@@ -9,6 +9,7 @@ module.exports = {
   font: require( __dirname + '/font' ),
   getter: require( __dirname + '/getter' ),
   html: require( __dirname + '/html' ),
+  isNumber: require( __dirname + '/isnumber' ),
   isObject: require( __dirname + '/isobject' ),
   loader: require( __dirname + '/loader' ),
   logger: require( __dirname + '/logger' ),
