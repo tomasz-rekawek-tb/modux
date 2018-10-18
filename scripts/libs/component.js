@@ -8,7 +8,7 @@ class Component {
     return ''
   }
 
-  stateChange ( url ) {}
+  stateChange () {}
 
   execute () {}
 
