@@ -2,6 +2,8 @@
 
 'use strict'
 
+const approx = require( __dirname + '/approx' )
+
 let scrollTo = ( x, y, speed ) => {
   let positionX = window.scrollX
   let positionY = window.scrollY
@@ -9,10 +11,10 @@ let scrollTo = ( x, y, speed ) => {
   let scroll = () => {
     let limitX = Math.abs( positionX - x )
     let limitY = Math.abs( positionY - y )
-    positionX = positionX + ( ( x - positionX ) / Math.abs( x - positionX ) ) * ( limitX * speed / 100 )
-    positionY = positionY + ( ( y - positionY ) / Math.abs( y - positionY ) ) * ( limitY * speed / 100 )
+    positionX = approx( positionX + ( ( x - positionX ) / Math.abs( x - positionX ) ) * ( limitX * speed / 100 ), 2 )
+    positionY = approx( positionY + ( ( y - positionY ) / Math.abs( y - positionY ) ) * ( limitY * speed / 100 ), 2 )
 
-    if ( parseInt( positionX ) !== parseInt( x ) && parseInt( positionY ) !== parseInt( y ) ) {
+    if ( Math.abs( parseInt( positionX ) - parseInt( x ) ) > 1 || Math.abs( parseInt( positionY ) - parseInt( y ) ) > 1 ) {
       window.scrollTo( positionX, positionY )
       requestAnimationFrame( scroll )
     }
@@ -27,10 +29,10 @@ let elementScrollTo = ( element, x, y, speed ) => {
   let scroll = () => {
     let limitX = Math.abs( positionX - x )
     let limitY = Math.abs( positionY - y )
-    positionX = positionX + ( ( x - positionX ) / Math.abs( x - positionX ) ) * ( limitX * speed / 100 )
-    positionY = positionY + ( ( y - positionY ) / Math.abs( y - positionY ) ) * ( limitY * speed / 100 )
+    positionX = approx( positionX + ( ( x - positionX ) / Math.abs( x - positionX ) ) * ( limitX * speed / 100 ), 2 )
+    positionY = approx( positionY + ( ( y - positionY ) / Math.abs( y - positionY ) ) * ( limitY * speed / 100 ), 2 )
 
-    if ( parseInt( positionX ) !== parseInt( x ) && parseInt( positionY ) !== parseInt( y ) ) {
+    if ( Math.abs( parseInt( positionX ) - parseInt( x ) ) > 1 || Math.abs( parseInt( positionY ) - parseInt( y ) ) > 1 ) {
       element.scrollLeft = positionX
       element.scrollTop = positionY
       requestAnimationFrame( scroll )
