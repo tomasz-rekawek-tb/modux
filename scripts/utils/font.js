@@ -2,6 +2,7 @@
 'use strict'
 
 const html = require( './html' )
+const loop = require( './loop' )
 
 let createContainer = ( name ) => {
   let e = html( `
@@ -27,7 +28,7 @@ let createBlankFont = () => {
   return e
 }
 
-module.exports = ( font, interval ) => {
+module.exports = ( font, styles, interval ) => {
   let blank = createBlankFont()
   document.getElementsByTagName( 'head' )[0].appendChild( blank )
 
@@ -35,6 +36,10 @@ module.exports = ( font, interval ) => {
   document.body.appendChild( container )
 
   container.style.fontFamily = '"' + font + '", "Adobe Blank"'
+
+  loop( styles, ( value, key ) => {
+    container.style[ key ] = value
+  } )
 
   return new Promise( ( resolve ) => {
     let timer = () => {
