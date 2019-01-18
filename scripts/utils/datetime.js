@@ -1,6 +1,6 @@
 'use strict'
 
-class DateTime extends Date {
+export class DateTime extends Date {
   toString () {
     return this.toISOString().slice( 0, 19 ).replace( 'T', ' ' )
   }
@@ -19,6 +19,8 @@ class DateTime extends Date {
     let time = timePassed % ( 24 * 60 * 60 * 1000 )
     return days + ' days ' + ( new DateTime( time ) ).toTime()
   }
-}
 
-module.exports = DateTime
+  elapsedTime () {
+    return Date.now() - this.getTime()
+  }
+}

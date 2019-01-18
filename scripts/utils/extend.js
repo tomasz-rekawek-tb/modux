@@ -1,8 +1,8 @@
 'use strict'
 
-const isObject = require( __dirname + '/isobject' )
+import { isObject } from './isobject.js'
 
-let extend = ( o1, o2 ) => {
+export let extend = ( o1, o2 ) => {
   if ( isObject( o1 ) && isObject( o2 ) ) {
     let keys = Object.keys( Object.assign( {}, o1, o2 ) )
     for ( let i = 0; i < keys.length; i++ ) {
@@ -13,5 +13,3 @@ let extend = ( o1, o2 ) => {
   }
   return o1
 }
-
-module.exports = extend

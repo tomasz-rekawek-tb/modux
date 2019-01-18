@@ -1,3 +1,3 @@
 'use strict'
 
-module.exports = value => ( Number( parseFloat( value ) ) === value )
+export let isNumber = value => ( Number( parseFloat( value ) ) === value )

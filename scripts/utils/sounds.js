@@ -2,7 +2,7 @@
 
 'use strict'
 
-const loop = require( './loop' )
+import { loop } from './loop.js'
 
 class Sound {
   constructor ( audio ) {
@@ -63,7 +63,7 @@ class Sounds {
     this._enabled = false
   }
 
-  static create () {
+  create () {
     return new Sounds()
   }
 
@@ -132,5 +132,5 @@ class Sounds {
   }
 }
 
-module.exports = Sounds.create()
+export let sounds = new Sounds()
 

@@ -1,10 +1,10 @@
 'use strict'
 
-const modux = require( './../../../../scripts' )
+import { loader } from './../../../../scripts'
 
-const Base = require( './index.js' )
+import { Index as Base } from './index.js'
 
-class Loader extends Base {
+export class LoaderTest extends Base {
   get name () {
     return 'Loader'
   }
@@ -14,7 +14,7 @@ class Loader extends Base {
       {
         description: 'Preload images',
         result: () => {
-          return modux.utils.loader.preload( [
+          return loader.preload( [
             { url: '/img1.png', type: 'image' },
             { url: '/img2.png', type: 'image' }
           ] )
@@ -26,7 +26,7 @@ class Loader extends Base {
       {
         description: 'Preload sounds',
         result: () => {
-          return modux.utils.loader.preload( [
+          return loader.preload( [
             { url: '/cheer_large.wav', type: 'audio' }
           ] )
             .then( () => {
@@ -37,7 +37,7 @@ class Loader extends Base {
       {
         description: 'Preload file',
         result: () => {
-          return modux.utils.loader.preload( [
+          return loader.preload( [
             { url: '/cheer_large.wav', type: 'file' }
           ] )
             .then( () => {
@@ -48,5 +48,3 @@ class Loader extends Base {
     ]
   }
 }
-
-module.exports = Loader

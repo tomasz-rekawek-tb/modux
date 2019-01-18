@@ -1,10 +1,10 @@
 'use strict'
 
-const modux = require( './../../../../scripts' )
+import { radians } from './../../../../scripts'
 
-const Base = require( './index.js' )
+import { Index as Base } from './index.js'
 
-class Radians extends Base {
+export class RadiansTest extends Base {
   get name () {
     return 'Radians'
   }
@@ -14,23 +14,21 @@ class Radians extends Base {
       {
         description: '270 deg to radians',
         result: () => {
-          return Promise.resolve( modux.utils.radians( 270 ) )
+          return Promise.resolve( radians( 270 ) )
         }
       },
       {
         description: '180 deg to radians',
         result: () => {
-          return Promise.resolve( modux.utils.radians( 180 ) )
+          return Promise.resolve( radians( 180 ) )
         }
       },
       {
         description: '0 deg to radians',
         result: () => {
-          return Promise.resolve( modux.utils.radians( 0 ) )
+          return Promise.resolve( radians( 0 ) )
         }
       }
     ]
   }
 }
-
-module.exports = Radians

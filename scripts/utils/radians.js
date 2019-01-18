@@ -1,3 +1,3 @@
 'use strict'
 
-module.exports = ( angle ) => angle * Math.PI / 180
+export let radians = ( angle ) => angle * Math.PI / 180

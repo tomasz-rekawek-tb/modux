@@ -3,7 +3,7 @@
 let debug = false
 let id = '[ APP ]'
 
-module.exports = {
+export let logger = {
 
   setId: ( value ) => {
     id = value

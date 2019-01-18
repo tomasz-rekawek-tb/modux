@@ -1,10 +1,10 @@
 'use strict'
 
-const modux = require( './../../../../scripts' )
+import { Component, loop, html } from './../../../../scripts'
 
 const template = require( './template.html' )
 
-class Index extends modux.Component {
+export class Index extends Component {
   get template () {
     return template
   }
@@ -18,7 +18,7 @@ class Index extends modux.Component {
   }
 
   createFeature ( description, index ) {
-    return modux.utils.html( '<li><b>Step ' + index + ':</b> ' + description + '<div class="output"></div></li>' )
+    return html( '<li><b>Step ' + index + ':</b> ' + description + '<div class="output"></div></li>' )
   }
 
   execute () {
@@ -51,7 +51,7 @@ class Index extends modux.Component {
       }
     }
 
-    modux.utils.loop( this.features, ( feature, index ) => {
+    loop( this.features, ( feature, index ) => {
       let e = this.createFeature( feature.description, index + 1 )
       features.appendChild( e )
 
@@ -74,5 +74,3 @@ class Index extends modux.Component {
     } )
   }
 }
-
-module.exports = Index

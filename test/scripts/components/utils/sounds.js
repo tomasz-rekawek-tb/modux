@@ -1,10 +1,10 @@
 'use strict'
 
-const modux = require( './../../../../scripts' )
+import { sounds } from './../../../../scripts'
 
-const Base = require( './index.js' )
+import { Index as Base } from './index.js'
 
-class Sounds extends Base {
+export class SoundsTest extends Base {
   get name () {
     return 'Sounds'
   }
@@ -14,9 +14,9 @@ class Sounds extends Base {
       {
         description: 'Play a sound after user interaction',
         result: () => {
-          return modux.utils.sounds.init()
+          return sounds.init()
             .then( () => {
-              return modux.utils.sounds
+              return sounds
                 .add( 'sound1', '/cheer_large.wav' )
                 .play()
                 .then( () => {
@@ -28,5 +28,3 @@ class Sounds extends Base {
     ]
   }
 }
-
-module.exports = Sounds

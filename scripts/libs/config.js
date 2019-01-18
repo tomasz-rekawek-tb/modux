@@ -1,6 +1,7 @@
 'use strict'
 
-const utils = require( __dirname + '/../utils' )
+import { getter } from './../utils/getter.js'
+import { setter } from './../utils/setter.js'
 
 class Config {
   constructor () {
@@ -8,11 +9,11 @@ class Config {
   }
 
   set ( key, value ) {
-    utils.setter( key, value, this.configuration )
+    setter( key, value, this.configuration )
     return this
   }
   get ( key ) {
-    return utils.getter( key || '', this.configuration )
+    return getter( key || '', this.configuration )
   }
 
   create () {
@@ -20,5 +21,4 @@ class Config {
   }
 }
 
-let config = new Config()
-module.exports = config
+export let config = new Config()

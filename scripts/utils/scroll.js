@@ -2,7 +2,7 @@
 
 'use strict'
 
-const approx = require( __dirname + '/approx' )
+import { approx } from './approx.js'
 
 let scrollTo = ( x, y, speed ) => {
   let positionX = window.scrollX
@@ -41,7 +41,7 @@ let elementScrollTo = ( element, x, y, speed ) => {
   scroll()
 }
 
-module.exports = {
+export let scroll = {
   scrollToTop: ( speed ) => {
     scrollTo( 0, 0, speed )
   },

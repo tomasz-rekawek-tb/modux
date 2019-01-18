@@ -1,13 +1,11 @@
 'use strict'
 
-const modux = require( './../../../../scripts' )
+import { Component } from './../../../../scripts'
 
 const template = require( './template.html' )
 
-class Layout extends modux.Component {
+export class Layout extends Component {
   get template () {
     return template
   }
 }
-
-module.exports = Layout

@@ -1,8 +1,8 @@
 /* globals XMLHttpRequest, FormData, document */
 
-const utils = require( __dirname + '/../utils' )
+import { loop } from './../utils/loop.js'
 
-class Communication {
+export class Communication {
   constructor ( form ) {
     this.__form = new FormData( form )
     this.__request = new XMLHttpRequest()
@@ -14,7 +14,7 @@ class Communication {
   }
 
   addFields ( fields ) {
-    utils.loop( fields, ( value, key ) => {
+    loop( fields, ( value, key ) => {
       this.__form.append( key, value )
     } )
   }
@@ -71,5 +71,3 @@ class Communication {
     this.send( url, 'GET' )
   }
 }
-
-module.exports = Communication

@@ -28,9 +28,12 @@ module.exports = () => {
     new CopyWebpackPlugin( [
       { context: path.join( apps, 'public' ), from: '**/*', to: build }
     ] ),
-    new webpack.DefinePlugin( { 'PRODUCTION': prod } ),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.DefinePlugin( { 'PRODUCTION': prod } )
   ]
+
+  if ( !prod ) {
+    plugins.push( new webpack.HotModuleReplacementPlugin() )
+  }
 
   if ( prod ) {
     plugins.push( new UglifyJSPlugin() )
@@ -90,7 +93,10 @@ module.exports = () => {
               loader: 'babel-loader',
               options: {
                 presets: [
-                  '@babel/preset-env'
+                  [ '@babel/preset-env', {
+                    modules: false,
+                    include: [ 'proposal-object-rest-spread' ]
+                  } ]
                 ]
               }
             }
@@ -105,8 +111,7 @@ module.exports = () => {
             {
               loader: 'css-loader',
               options: {
-                url: false,
-                minimize: !!( prod )
+                url: false
               }
             },
             {
@@ -126,8 +131,7 @@ module.exports = () => {
             {
               loader: 'css-loader',
               options: {
-                url: false,
-                minimize: !!( prod )
+                url: false
               }
             },
             {
@@ -151,6 +155,9 @@ module.exports = () => {
     plugins: plugins,
     performance: {
       hints: ( prod ) ? false : 'warning'
+    },
+    optimization: {
+      usedExports: true
     }
   }
 }

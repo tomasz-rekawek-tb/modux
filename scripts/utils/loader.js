@@ -2,15 +2,15 @@
 
 'use strict'
 
-const loop = require( './loop' )
-const isObject = require( './isobject' )
+import { loop } from './loop.js'
+import { isObject } from './isobject.js'
 
 class Loader {
   constructor () {
     this._cache = {}
   }
 
-  static create () {
+  create () {
     return new Loader()
   }
 
@@ -98,4 +98,4 @@ class Loader {
   }
 }
 
-module.exports = Loader.create()
+export let loader = new Loader()

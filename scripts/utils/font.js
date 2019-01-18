@@ -1,8 +1,8 @@
 /* globals document */
 'use strict'
 
-const html = require( './html' )
-const loop = require( './loop' )
+import { html } from './html.js'
+import { loop } from './loop.js'
 
 let createContainer = ( name ) => {
   let e = html( `
@@ -28,7 +28,7 @@ let createBlankFont = () => {
   return e
 }
 
-module.exports = ( font, styles, interval ) => {
+export let font = ( font, styles, interval ) => {
   let blank = createBlankFont()
   document.getElementsByTagName( 'head' )[0].appendChild( blank )
 

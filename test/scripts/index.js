@@ -2,25 +2,35 @@
 
 'use strict'
 
-const modux = require( './../../scripts' )
+import { Module, config, logger } from './../../scripts'
+
+import { Layout } from './components/layout'
+
+import { ApproxTest } from './components/utils/approx'
+import { FontTest } from './components/utils/font'
+import { LoaderTest } from './components/utils/loader'
+import { RadiansTest } from './components/utils/radians'
+// import { SoundsTest } from './components/utils/sounds'
+import { DateTimeTest } from './components/utils/datetime'
 
 let initialize = () => {
-  modux.config.set( 'core', window.config )
+  config.set( 'core', window.config )
 
-  modux.utils.logger.enabled( modux.config.get( 'core.debug' ) )
+  logger.enabled( config.get( 'core.debug' ) )
 
-  modux.utils.logger.info( 'Application start' )
+  logger.info( 'Application start' )
 
   // Create application
-  let app = new modux.Module( 'app' )
+  let app = new Module( 'app' )
   app
-    .addDependency( 'layout', require( './components/layout' ) )
+    .addDependency( 'layout', Layout )
 
-    .addDependency( 'utils-approx', require( './components/utils/approx' ) )
-    .addDependency( 'utils-font', require( './components/utils/font' ) )
-    .addDependency( 'utils-loader', require( './components/utils/loader' ) )
-    .addDependency( 'utils-radians', require( './components/utils/radians' ) )
-    .addDependency( 'utils-sounds', require( './components/utils/sounds' ) )
+    .addDependency( 'utils-approx', ApproxTest )
+    .addDependency( 'utils-font', FontTest )
+    .addDependency( 'utils-loader', LoaderTest )
+    .addDependency( 'utils-radians', RadiansTest )
+    // .addDependency( 'utils-sounds', SoundsTest )
+    .addDependency( 'utils-datetime', DateTimeTest )
 
   // Start application
   app.bootstrap( document.querySelector( 'body' ), 'layout' )

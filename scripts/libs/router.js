@@ -2,15 +2,17 @@
 
 'use strict'
 
-const utils = require( __dirname + '/../utils' )
+import { logger } from './../utils/logger.js'
+import { loop } from './../utils/loop.js'
+import { uid } from './../utils/uid.js'
 
 let listeners = {}
 
 const handler = function () {
   const url = location.pathname + location.search + location.hash
-  utils.logger.info( 'redirecting to', url )
+  logger.info( 'redirecting to', url )
 
-  utils.loop( listeners, ( listener ) => {
+  loop( listeners, ( listener ) => {
     listener( url )
   } )
 }
@@ -30,18 +32,16 @@ history.pushState = function () {
   return next
 }
 
-class Router {
+export class Router {
   static redirect ( url ) {
     history.pushState( { url: url }, '', url )
   }
 
   static onStateChange ( listener ) {
-    let id = utils.uid()
+    let id = uid()
     listeners[ id ] = listener
     return () => {
       delete listeners[ id ]
     }
   }
 }
-
-module.exports = Router

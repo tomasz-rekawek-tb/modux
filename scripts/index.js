@@ -1,24 +1,46 @@
 'use strict'
 
-const config = require( __dirname + '/libs/config' )
-const router = require( __dirname + '/libs/router' )
-const store = require( __dirname + '/libs/store' )
+import { config } from './libs/config.js'
+import { store } from './libs/store.js'
 
-const Communication = require( __dirname + '/libs/communication' )
-const Component = require( __dirname + '/libs/component' )
+import { Device } from './libs/device.js'
 
-const Module = require( __dirname + '/libs/module' )
+import { Router } from './libs/router.js'
 
-const utils = require( __dirname + '/utils' )
+import { Communication } from './libs/communication'
+import { Component } from './libs/component'
+import { Module } from './libs/module.js'
 
-module.exports = {
-  Communication: Communication,
-  Component: Component,
+import { approx } from './utils/approx.js'
+import { cookie } from './utils/cookie.js'
+import { DateTime } from './utils/datetime.js'
+import { extend } from './utils/extend.js'
+import { font } from './utils/font.js'
+import { getter } from './utils/getter.js'
+import { html } from './utils/html.js'
+import { isNumber } from './utils/isnumber.js'
+import { isObject } from './utils/isobject.js'
+import { loader } from './utils/loader.js'
+import { logger } from './utils/logger.js'
+import { loop } from './utils/loop.js'
+import { radians } from './utils/radians.js'
+import { rnd } from './utils/rnd.js'
+import { scroll } from './utils/scroll.js'
+import { setter } from './utils/setter.js'
+import { sounds } from './utils/sounds.js'
+import { uid } from './utils/uid.js'
 
-  config: config,
-  router: router,
-  store: store,
-  utils: utils,
+export {
+  config,
+  store,
 
-  Module: Module
+  Device,
+
+  Router,
+
+  Communication,
+  Component,
+  Module,
+
+  approx, cookie, DateTime, extend, font, getter, html, isNumber, isObject, loader, logger, loop, radians, rnd, scroll, setter, sounds, uid
 }

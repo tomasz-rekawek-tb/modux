@@ -1,10 +1,10 @@
 'use strict'
 
-const modux = require( './../../../../scripts' )
+import { font, html } from './../../../../scripts'
 
-const Base = require( './index.js' )
+import { Index as Base } from './index.js'
 
-class Font extends Base {
+export class FontTest extends Base {
   get name () {
     return 'Font'
   }
@@ -14,7 +14,7 @@ class Font extends Base {
       {
         description: 'Load a specific font',
         result: () => {
-          this.element.appendChild( modux.utils.html(
+          this.element.appendChild( html(
             `
             <style>
             @import url('https://fonts.googleapis.com/css?family=Spirax');
@@ -22,7 +22,7 @@ class Font extends Base {
             `
           ) )
 
-          return modux.utils.font( 'Spirax' )
+          return font( 'Spirax' )
             .then( () => {
               return Promise.resolve( 'Demo font Spirax from google fonts, was loaded.' )
             } )
@@ -31,5 +31,3 @@ class Font extends Base {
     ]
   }
 }
-
-module.exports = Font

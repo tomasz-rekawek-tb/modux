@@ -2,11 +2,11 @@
 
 'use strict'
 
-const utils = require( __dirname + '/../utils' )
-const Router = require( __dirname + '/router' )
+import { loop } from './../utils/loop.js'
+import { Router } from './router.js'
 
-const config = require( __dirname + '/config' )
-const store = require( __dirname + '/store' )
+import { config } from './config.js'
+import { store } from './store.js'
 
 const _attrComponent = 'data-modux-component'
 const _attrLink = 'data-modux-link'
@@ -19,7 +19,7 @@ const linkHandler = function ( e ) {
   }
 }
 
-class Module {
+export class Module {
   addDependency ( name, dependency ) {
     this.__dependencies[ name ] = dependency
     return this
@@ -71,7 +71,7 @@ class Module {
     if ( name ) {
       handler( node, name )
     }
-    utils.loop( node.querySelectorAll( '*[' + attr + ']' ), ( element ) => {
+    loop( node.querySelectorAll( '*[' + attr + ']' ), ( element ) => {
       handler( element, element.getAttribute( attr ) )
     } )
   }
@@ -93,7 +93,7 @@ class Module {
         if ( mutation.type === 'childList' ) {
           if ( mutation.addedNodes.length > 0 ) {
             // Nodes that were added
-            utils.loop( mutation.addedNodes, ( node ) => {
+            loop( mutation.addedNodes, ( node ) => {
               this.__loopOnElements( node, _attrComponent, ( e, attr ) => {
                 if ( this.__dependencies[ attr ] ) {
                   this.__createComponent( e, this.__dependencies[ attr ] )
@@ -106,7 +106,7 @@ class Module {
           }
           if ( mutation.removedNodes.length > 0 ) {
             // Nodes that were removed
-            utils.loop( mutation.removedNodes, ( node ) => {
+            loop( mutation.removedNodes, ( node ) => {
               this.__loopOnElements( node, _attrComponent, ( e ) => {
                 this.__removeComponent( e )
               } )
@@ -132,5 +132,3 @@ class Module {
     this.__htmlWatcher.disconnect()
   }
 }
-
-module.exports = Module

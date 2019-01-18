@@ -1,6 +1,7 @@
 'use strict'
 
-const utils = require( __dirname + '/../utils' )
+import { loop } from './../utils/loop.js'
+import { uid } from './../utils/uid.js'
 
 class Store {
   constructor () {
@@ -9,7 +10,7 @@ class Store {
   }
 
   on ( eventname, listener, showPreviousData ) {
-    let id = utils.uid()
+    let id = uid()
     this.__listeners[ id ] = {
       eventname: eventname,
       handler: listener
@@ -27,7 +28,7 @@ class Store {
     let eventname = values.shift()
 
     this.__data[ eventname ] = values
-    utils.loop( this.__listeners, ( data ) => {
+    loop( this.__listeners, ( data ) => {
       if ( data.eventname === eventname ) {
         data.handler.apply( data.handler, values )
       }
@@ -39,5 +40,4 @@ class Store {
   }
 }
 
-let store = new Store()
-module.exports = store
+export let store = new Store()

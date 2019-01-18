@@ -30,7 +30,7 @@ let getCookie = ( name ) => {
   return ''
 }
 
-module.exports = {
+export let cookie = {
   set: setCookie,
   get: getCookie
 }

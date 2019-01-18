@@ -1,6 +1,6 @@
 'use strict'
 
-const isObject = require( __dirname + '/isobject' )
+import { isObject } from './isobject.js'
 
 let setValueForObject = ( keys, value, collection ) => {
   let key = keys.shift()
@@ -15,7 +15,7 @@ let setValueForObject = ( keys, value, collection ) => {
   }
 }
 
-module.exports = ( key, value, collection ) => {
+export let setter = ( key, value, collection ) => {
   if ( typeof key === 'string' && isObject( collection ) ) {
     if ( key === '' ) {
       collection = value

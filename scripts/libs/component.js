@@ -1,9 +1,10 @@
 'use strict'
 
-const utils = require( __dirname + '/../utils' )
-const Router = require( __dirname + '/router' )
+import { html } from './../utils/html.js'
+import { uid } from './../utils/uid.js'
+import { Router } from './router.js'
 
-class Component {
+export class Component {
   get template () {
     return ''
   }
@@ -15,9 +16,9 @@ class Component {
   terminate () {}
 
   constructor ( parent, config, store ) {
-    this.uid = utils.uid()
+    this.uid = uid()
     this.parent = parent
-    this.element = utils.html( this.template )
+    this.element = html( this.template )
 
     this.config = config
     this.store = store
@@ -43,5 +44,3 @@ class Component {
     delete this.parent.moduxComponent
   }
 }
-
-module.exports = Component
