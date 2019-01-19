@@ -4,7 +4,13 @@
 import { loop } from './../utils/loop.js'
 import { uid } from './../utils/uid.js'
 
+/**
+ * Class used to get device information
+ */
 export class Device {
+  /**
+   * Creates an instance of Device
+   */
   constructor () {
     const ua = navigator.userAgent || navigator.vendor || window.opera
 
@@ -31,48 +37,93 @@ export class Device {
       device = 'Linux'
     }
 
-    this._handlerListener = ( handler ) => {
+    /**
+     * Contains all the handlers bound to the window resize
+     * @type {Function}
+     * @private
+     */
+    this.__handlerListener = ( handler ) => {
       let orientation = ( window.innerHeight > window.innerWidth ) ? 'portrait' : 'landscape'
       handler( orientation )
     }
 
-    this._handlerResize = () => {
-      loop( this._listeners, ( handler ) => {
-        this._handlerListener( handler )
+    /**
+     * Calls all the handlers bound
+     * @type {Function}
+     * @private
+     */
+    this.__handlerResize = () => {
+      loop( this.__listeners, ( handler ) => {
+        this.__handlerListener( handler )
       } )
     }
-    this._handlerBound = false
 
-    this._device = device
-    this._listeners = {}
+    /**
+     * Determines if any handlers are bound
+     * @type {Boolean}
+     * @private
+     */
+    this.__handlerBound = false
+
+    /**
+     * Holds the device type
+     * @type {String}
+     * @private
+     */
+    this.__device = device
+
+    /**
+     * Holds all the handlers bound
+     * @type {Object}
+     * @private
+     */
+    this.__listeners = {}
   }
 
+  /**
+   * Method used to attach a handler to the on resize event. Returns a function that can be called to remove the handler at a further date
+   * @param {Function} listener A function containing one parameter which can be "landscape" or "portrait"
+   * @return {Function}
+   */
   onResize ( listener ) {
     let id = uid()
-    this._listeners[ id ] = listener
-    if ( !this._handlerBound ) {
-      window.addEventListener( 'resize', this._handlerResize )
-      this._handlerBound = true
+    this.__listeners[ id ] = listener
+    if ( !this.__handlerBound ) {
+      window.addEventListener( 'resize', this.__handlerResize )
+      this.__handlerBound = true
     }
 
-    this._handlerListener( listener )
+    this.__handlerListener( listener )
 
     return () => {
-      delete this._listeners[ id ]
-      if ( Object.keys( this._listeners ).length === 0 && this._handlerBound ) {
-        window.removeEventListener( 'resize', this._handlerResize )
+      delete this.__listeners[ id ]
+      if ( Object.keys( this.__listeners ).length === 0 && this.__handlerBound ) {
+        window.removeEventListener( 'resize', this.__handlerResize )
       }
     }
   }
 
+  /**
+   * Returns the device name
+   * @return {String}
+   */
   type () {
-    return this._device
+    return this.__device
   }
 
+  /**
+   * Returns true if the device is a desktop
+   * @return {Boolean}
+   */
   isDesktop () {
-    return [ 'Windows', 'Linux', 'Macintosh', 'other' ].indexOf( this._device ) !== -1
+    return [ 'Windows', 'Linux', 'Macintosh', 'other' ].indexOf( this.__device ) !== -1
   }
+
+  /**
+   * Returns true if the device is a mobile device
+   * @return {Boolean}
+   */
   isMobile () {
-    [ 'Windows', 'Linux', 'Macintosh', 'other' ].indexOf( this._device ) === -1
+    [ 'Windows', 'Linux', 'Macintosh', 'other' ].indexOf( this.__device ) === -1
   }
 }

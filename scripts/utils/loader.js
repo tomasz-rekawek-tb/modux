@@ -7,7 +7,7 @@ import { isObject } from './isobject.js'
 
 class Loader {
   constructor () {
-    this._cache = {}
+    this.__cache = {}
   }
 
   create () {
@@ -18,8 +18,8 @@ class Loader {
     let img = new Image()
     return new Promise( ( resolve, reject ) => {
       img.onload = () => {
-        this._cache[ url ] = img
-        resolve( this._cache[ url ] )
+        this.__cache[ url ] = img
+        resolve( this.__cache[ url ] )
       }
       img.onerror = ( err ) => {
         reject( err )
@@ -32,8 +32,8 @@ class Loader {
     let audio = new Audio()
     return new Promise( ( resolve, reject ) => {
       audio.addEventListener( 'canplay', () => {
-        this._cache[ url ] = audio
-        resolve( this._cache[ url ] )
+        this.__cache[ url ] = audio
+        resolve( this.__cache[ url ] )
       } )
       audio.onerror = ( err ) => {
         reject( err )
@@ -47,8 +47,8 @@ class Loader {
     return new Promise( ( resolve, reject ) => {
       xhr.open( 'GET', url )
       xhr.onload = () => {
-        this._cache[ url ] = url
-        resolve( this._cache[ url ] )
+        this.__cache[ url ] = url
+        resolve( this.__cache[ url ] )
       }
       xhr.onerror = ( err ) => {
         reject( err )

@@ -8,9 +8,19 @@ import { Router } from './router.js'
 import { config } from './config.js'
 import { store } from './store.js'
 
+/**
+ * The attribute name used to determine if an HTMLElement is a component
+ */
 const _attrComponent = 'data-modux-component'
+/**
+ * The attribute name used to determine if an HTMLElement ( usually an anchor tag ) is a state change component. This will prevent server reload on anchor tags.
+ */
 const _attrLink = 'data-modux-link'
 
+/**
+ * A shorthand for the link element handler
+ * @param {Event} e
+ */
 const linkHandler = function ( e ) {
   let url = this.getAttribute( 'href' )
   if ( url ) {
@@ -19,11 +29,23 @@ const linkHandler = function ( e ) {
   }
 }
 
+/**
+ * The main class, used to create a Modux module. You can think of this as the main application
+ */
 export class Module {
+  /**
+   * A method used to add components to the Module
+   * @param {String} name The name under which the Component will be known as
+   * @param {Component} dependency The Component to be added
+   */
   addDependency ( name, dependency ) {
     this.__dependencies[ name ] = dependency
     return this
   }
+  /**
+   * A method used to remove components from the Module
+   * @param {String} name The name of the Component to be removed
+   */
   removeDependency ( name ) {
     if ( this.__dependencies[ name ] ) {
       delete this.__dependencies[ name ]
@@ -31,31 +53,68 @@ export class Module {
     return this
   }
 
+  /**
+   * Creates an instance of Module
+   * @param {String} [name] A unique name for the application, for easier management
+   */
   constructor ( name ) {
+    /**
+     * A unique name for the application, for easier management
+     * @type {String}
+     */
     this.__name = name
+    /**
+     * Contains all the components added to the module
+     * @type {Object}
+     */
     this.__dependencies = {}
+    /**
+     * Contains a new instance of Config which is passed on to all components
+     * @type {Config}
+     */
     this.__config = config.create()
+    /**
+     * Contains a new instance of Store which is passed on to all components
+     * @type {Store}
+     */
     this.__store = store.create()
   }
 
+  /**
+   * Creates a component on an HTMLElement if it doesn't have one already
+   * @param {HTMLElement} element The HTMLElement to bind the Component to
+   * @param {Component} Component The Component to be bound
+   */
   __createComponent ( element, Component ) {
     if ( !element.moduxComponent ) {
       element.moduxComponent = new Component( element, this.__config, this.__store )
     }
   }
 
+  /**
+   * Removes a component from an HTMLElement if it has one
+   * @param {HTMLElement} element The HTMLElement for which we want to remove the Component
+   */
   __removeComponent ( element ) {
     if ( element.moduxComponent ) {
       element.moduxComponent.destroy()
     }
   }
 
+  /**
+   * Creates a link component on an HTMLElement if it doesn't have one already
+   * @param {HTMLElement} element The HTMLElement to bind the link to
+   */
   __createComponentLink ( element ) {
     if ( !element.moduxLink ) {
       element.addEventListener( 'click', linkHandler )
       element.moduxLink = true
     }
   }
+  /**
+   * Removes a link component from an HTMLElement if it has one
+   * @param {HTMLElement} element The HTMLElement for which we want to remove the link
+   */
   __removeComponentLink ( element ) {
     if ( element.moduxLink ) {
       element.removeEventListener( 'click', linkHandler )
@@ -63,6 +122,12 @@ export class Module {
     }
   }
 
+  /**
+   * Checks if the current element needs a Component instance
+   * @param {HTMLElement} node HTMLElement what we are checking
+   * @param {String} attr The attribute to watch out for
+   * @param {Function} handler The callback function which will be called after the checks are made
+   */
   __loopOnElements ( node, attr, handler ) {
     if ( !( node instanceof HTMLElement ) ) {
       return
@@ -76,8 +141,15 @@ export class Module {
     } )
   }
 
+  /**
+   * Initializes the Module on a specific HTMLElement and loads the specified Component for it
+   * @param {HTMLElement} element The HTMLElement used as the wrapper for the Module
+   * @param {Component} component The Component to be used as the main Component
+   */
   bootstrap ( element, component ) {
-    // Manage dom modifications
+    /**
+     * Holds the MutationObserver which is used to check for changes in the DOM
+     */
     this.__htmlWatcher = new MutationObserver( ( mutations ) => {
       mutations.forEach( ( mutation ) => {
         if ( mutation.type === 'attributes' ) {
@@ -123,12 +195,18 @@ export class Module {
     if ( !this.__dependencies[ component ] ) {
       throw new Error( 'Initial component cannot be found in dependency list' )
     }
-    this.component = new this.__dependencies[ component ]( element, this.__config, this.__store )
-    element.moduxComponent = this.component
+    /**
+     * Holds the main Component which is used for the Module.
+     */
+    this.__component = new this.__dependencies[ component ]( element, this.__config, this.__store )
+    element.moduxComponent = this.__component
   }
 
+  /**
+   * Destroy the current module. This will also destroy all the components created and disconnect the MutationObserver
+   */
   destroy () {
-    this.component.destroy()
+    this.__component.__destroy()
     this.__htmlWatcher.disconnect()
   }
 }

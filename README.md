@@ -27,40 +27,37 @@ In order to support older versions of browsers, you can use polyfills:
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,MutationObserver,console.info,es5,es6,Audio"></script>
 ```
 
-### Modux classes
-
-  1. `config` - A configuration instance for storing data
-  2. `store` - A class used to communicate between components
-
-  3. `Device` - A class for determining the device and screen orientation
-
-  4. `Router` - The router static class
-
-  5. `Communication` - A class used to make requests to the server
-  6. `Component` - The base class of each custom component you build
-  7. `Module` - A class used to create applications
-
-  8. `utils` - A utility class
-
-### Utils library
+## Modux classes
 
   |Name|Usage|Description|
   |:---:|---|---|
-  |approx|approx( number, decimals ) `return` Number|Approximate a number to a specific number of decimals|
-  |cookie|get ( name ) `return` String<br/>set ( name, value, path, seconds ) `return` undefined|Cookie manipulation|
-  |DateTime|new DateTime() `return` DateTime|DateTime class|
-  |extend|extend( object1, object2 ) `return` object1|Extends an object with another object|
-  |font|font( font, interval ) `return` Promise|Font loader|
-  |getter|getter( key, collection ) `return` mixed|Gets a value from an object|
-  |html|html( string ) `return` Element|Converts a string to html element|
-  |isNumber|isNumber( number ) `return` Boolean|Checks if variable is a number|
-  |isObject|isObject( object ) `return` Boolean|Checks if variable is an object|
-  |loader|loader.create() `return` Loader<br/><br/>preload( files, progress ) `return` Promise<br/>preloadImage( url ) `return` Promise<br/>preloadAudio( url ) `return` Promise<br/>preloadFile( url ) `return` Promise|Preloading library|
-  |logger|setId( value ) `return` undefined<br/>enabled( enabled ) `return` undefined<br/>log( arguments ) `return` undefined<br/>info( arguments ) `return` undefined<br/>warn( arguments ) `return` undefined<br/>error( arguments ) `return` undefined|Logging to Console|
-  |loop|loop( list, ( value, key ) => {} ) `return` undefined|Loop over array or object properties|
-  |radians|radians( angle ) `return` Number|Convert angle to radians|
-  |rnd|rnd( min, max ) `return` Number|Generates a random number between min and max|
-  |scroll|scrollToTop( speed ) `return` undefined<br/>elementScrollTo( element, x, y, speed ) `return` undefined<br/>scrollTo( x, y, speed ) `return` undefined|Scroll helper|
-  |setter|setter( key, value, collection ) `return` undefined|Sets a value for an object property|
-  |Sounds|init() `return` Promise<br/>enable( boolean ) `return` undefined<br/>mute( boolean ) `return` undefined<br/>add( string, url ) `return` Sound<br/>get( string ) `return` Sound|A sound class|
-  |uid|uid() `return` String|Generates a unique indentifier|
+  | config | `import { config } from 'modux'` | The config class instance |
+  | store | `import { store } from 'modux'` | The store class instance |
+  | Device | `import { Device } from 'modux'` | The device class |
+  | Router | `import { Router } from 'modux'` | The static Router class |
+  | Communication | `import { Communication } from 'modux'` | The Communication class |
+  | Component | `import { Component } from 'modux'` | The Component class |
+  | Module | `import { Module } from 'modux'` | The Module class |
+
+## Utils classes
+
+  |Name|Usage|Description|
+  |:---:|---|---|
+  | approx | `import { approx } from 'modux'` | The approx function |
+  | cookie | `import { cookie } from 'modux'` | cookie is an object containing two properties `set( name, value, path, seconds )` and `get( name )` |
+  | DateTime | `import { DateTime } from 'modux'` | The DateTime class |
+  | extend | `import { extend } from 'modux'` | The extend function |
+  | font | `import { font } from 'modux'` | The font function |
+  | getter | `import { getter } from 'modux'` | The getter function |
+  | html | `import { html } from 'modux'` | The html function |
+  | isNumber | `import { isNumber } from 'modux'` | The isNumber function |
+  | isObject | `import { isObject } from 'modux'` | The isObject function |
+  | loader | `import { loader } from 'modux'` | The loader class |
+  | logger | `import { logger } from 'modux'` | logger is an object containing a mirror of `console` object |
+  | loop | `import { loop } from 'modux'` | The loop function |
+  | radians | `import { radians } from 'modux'` | The radians function |
+  | rnd | `import { rnd } from 'modux'` | The rnd function |
+  | scroll | `import { scroll } from 'modux'` | scroll is an object containing three properties `scrollToTop( speed )`, `elementScrollTo( element, x, y, speed )`, `scrollTo( x, y, speed )` |
+  | setter | `import { setter } from 'modux'` | The setter function |
+  | Sounds | `import { sonds } from 'modux'` | The sounds class instance |
+  | uid | `import { uid } from 'modux'` | The uid function |

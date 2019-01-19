@@ -6,32 +6,32 @@ import { loop } from './loop.js'
 
 class Sound {
   constructor ( audio ) {
-    this._audio = audio
-    this._enabled = false
-    this._looped = false
+    this.__audio = audio
+    this.__enabled = false
+    this.__looped = false
 
     audio.addEventListener( 'ended', () => {
       audio.currentTime = 0
-      if ( this._looped ) {
+      if ( this.__looped ) {
         audio.play()
       }
     } )
   }
 
   enabled ( enabled ) {
-    this._enabled = enabled
+    this.__enabled = enabled
   }
 
   volume ( volume ) {
-    this._audio.volume = volume
+    this.__audio.volume = volume
   }
 
   play () {
-    if ( !this._enabled ) {
+    if ( !this.__enabled ) {
       return Promise.resolve()
     }
 
-    let result = this._audio.play()
+    let result = this.__audio.play()
 
     // Old browsers don't return a promise for play(), so we create one
     if ( !( result instanceof Promise ) ) {
@@ -42,25 +42,25 @@ class Sound {
   }
 
   pause () {
-    if ( !this._audio.paused ) {
-      this._audio.pause()
+    if ( !this.__audio.paused ) {
+      this.__audio.pause()
     }
     return Promise.resolve()
   }
 
   mute ( mute ) {
-    this._audio.muted = mute
+    this.__audio.muted = mute
   }
 
   loop ( looped ) {
-    this._looped = looped
+    this.__looped = looped
   }
 }
 
 class Sounds {
   constructor () {
-    this._collection = {}
-    this._enabled = false
+    this.__collection = {}
+    this.__enabled = false
   }
 
   create () {
@@ -105,15 +105,15 @@ class Sounds {
   }
 
   enable ( enable ) {
-    this._enabled = enable
+    this.__enabled = enable
 
-    loop( this._collection, ( sound ) => {
+    loop( this.__collection, ( sound ) => {
       sound.enabled( enable )
     } )
   }
 
   mute ( mute ) {
-    loop( this._collection, ( sound ) => {
+    loop( this.__collection, ( sound ) => {
       sound.muted = mute
     } )
   }
@@ -122,13 +122,13 @@ class Sounds {
     if ( typeof audio === 'string' ) {
       audio = new Audio( audio )
     }
-    this._collection[ name ] = new Sound( audio )
-    this._collection[ name ].enabled( this._enabled )
-    return this._collection[ name ]
+    this.__collection[ name ] = new Sound( audio )
+    this.__collection[ name ].enabled( this.__enabled )
+    return this.__collection[ name ]
   }
 
   get ( name ) {
-    return this._collection[ name ]
+    return this.__collection[ name ]
   }
 }
 
