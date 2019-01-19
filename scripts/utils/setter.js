@@ -2,6 +2,9 @@
 
 import { isObject } from './isobject.js'
 
+/**
+ * Used to set a deep value from an Object. Without any checks.
+ */
 let setValueForObject = ( keys, value, collection ) => {
   let key = keys.shift()
 
@@ -15,6 +18,12 @@ let setValueForObject = ( keys, value, collection ) => {
   }
 }
 
+/**
+ * Used to set a deep value from an Object
+ * @param {String} key The key to set the value for
+ * @param {String} value The values to be set
+ * @param {Object} collection The collection to be added to
+ */
 export let setter = ( key, value, collection ) => {
   if ( typeof key === 'string' && isObject( collection ) ) {
     if ( key === '' ) {

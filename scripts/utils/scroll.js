@@ -4,6 +4,12 @@
 
 import { approx } from './approx.js'
 
+/**
+ * Scroll window to position
+ * @param {Number} x The x position
+ * @param {Number} y The y position
+ * @param {Number} speed The scroll speed
+ */
 let scrollTo = ( x, y, speed ) => {
   let positionX = window.scrollX
   let positionY = window.scrollY
@@ -22,6 +28,13 @@ let scrollTo = ( x, y, speed ) => {
   scroll()
 }
 
+/**
+ * Scrolls an element to position
+ * @param {HTMLElement} element
+ * @param {Number} x The x position
+ * @param {Number} y The y position
+ * @param {Number} speed The scroll speed
+ */
 let elementScrollTo = ( element, x, y, speed ) => {
   let positionX = element.scrollLeft
   let positionY = element.scrollTop
@@ -41,6 +54,9 @@ let elementScrollTo = ( element, x, y, speed ) => {
   scroll()
 }
 
+/**
+ * A library used for scrolling window or an element
+ */
 export let scroll = {
   scrollToTop: ( speed ) => {
     scrollTo( 0, 0, speed )

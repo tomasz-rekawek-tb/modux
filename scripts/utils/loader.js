@@ -5,15 +5,35 @@
 import { loop } from './loop.js'
 import { isObject } from './isobject.js'
 
+/**
+ * The Loader class is used to preload files
+ */
 class Loader {
+  /**
+   * Creates an instance of the Loader class
+   */
   constructor () {
+    /**
+     * Contains a cache of files
+     * @type {Object}
+     * @private
+     */
     this.__cache = {}
   }
 
+  /**
+   * Create a new instance of the Loader
+   * @return {Loader} The new Loader instance
+   */
   create () {
     return new Loader()
   }
 
+  /**
+   * Preload an image
+   * @param {String} url The image url to load
+   * @return {Promise} Returns a promise which is resolved upon loading
+   */
   preloadImage ( url ) {
     let img = new Image()
     return new Promise( ( resolve, reject ) => {
@@ -28,6 +48,11 @@ class Loader {
     } )
   }
 
+  /**
+   * Preload an audio file
+   * @param {String} url The audio url to load
+   * @return {Promise} Returns a promise which is resolved upon loading
+   */
   preloadAudio ( url ) {
     let audio = new Audio()
     return new Promise( ( resolve, reject ) => {
@@ -42,6 +67,11 @@ class Loader {
     } )
   }
 
+  /**
+   * Preload a file using HTTPRequest
+   * @param {String} url The file url to load
+   * @return {Promise} Returns a promise which is resolved upon loading
+   */
   preloadFile ( url ) {
     let xhr = new XMLHttpRequest()
     return new Promise( ( resolve, reject ) => {
@@ -57,6 +87,12 @@ class Loader {
     } )
   }
 
+  /**
+   * Load a list of files
+   * @param {Object} files Contains a list of files to load
+   * @param {Function} progress A callback function with the parameters: "err, id, data, loaded, total"
+   * @return {Promise} Returns a promise which is resolved upon loading all files, doesn't matter if they failed or not
+   */
   preload ( files, progress ) {
     return new Promise( ( resolve ) => {
       let total = Object.keys( files ).length
@@ -98,4 +134,7 @@ class Loader {
   }
 }
 
+/**
+ * Returns a singleton of the Loader
+ */
 export let loader = new Loader()

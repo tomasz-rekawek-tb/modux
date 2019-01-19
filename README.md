@@ -31,33 +31,33 @@ In order to support older versions of browsers, you can use polyfills:
 
   |Name|Usage|Description|
   |:---:|---|---|
-  | config | `import { config } from 'modux'` | The config class instance |
-  | store | `import { store } from 'modux'` | The store class instance |
-  | Device | `import { Device } from 'modux'` | The device class |
-  | Router | `import { Router } from 'modux'` | The static Router class |
-  | Communication | `import { Communication } from 'modux'` | The Communication class |
-  | Component | `import { Component } from 'modux'` | The Component class |
-  | Module | `import { Module } from 'modux'` | The Module class |
+  | config | `import { config } from 'modux'` | A class containing the configuration |
+  | store | `import { store } from 'modux'` | A class used to communicate between components |
+  | Device | `import { Device } from 'modux'` | A class used to determine device |
+  | Router | `import { Router } from 'modux'` | A static class used to manipulate states and urls |
+  | Communication | `import { Communication } from 'modux'` | The Communication class, used to handler http requests |
+  | Component | `import { Component } from 'modux'` | The Component class. Components are the backbone of the application |
+  | Module | `import { Module } from 'modux'` | The Module class. Modules are the main part of modux |
 
 ## Utils classes
 
   |Name|Usage|Description|
   |:---:|---|---|
-  | approx | `import { approx } from 'modux'` | The approx function |
-  | cookie | `import { cookie } from 'modux'` | cookie is an object containing two properties `set( name, value, path, seconds )` and `get( name )` |
-  | DateTime | `import { DateTime } from 'modux'` | The DateTime class |
-  | extend | `import { extend } from 'modux'` | The extend function |
-  | font | `import { font } from 'modux'` | The font function |
-  | getter | `import { getter } from 'modux'` | The getter function |
-  | html | `import { html } from 'modux'` | The html function |
-  | isNumber | `import { isNumber } from 'modux'` | The isNumber function |
-  | isObject | `import { isObject } from 'modux'` | The isObject function |
-  | loader | `import { loader } from 'modux'` | The loader class |
-  | logger | `import { logger } from 'modux'` | logger is an object containing a mirror of `console` object |
-  | loop | `import { loop } from 'modux'` | The loop function |
-  | radians | `import { radians } from 'modux'` | The radians function |
-  | rnd | `import { rnd } from 'modux'` | The rnd function |
-  | scroll | `import { scroll } from 'modux'` | scroll is an object containing three properties `scrollToTop( speed )`, `elementScrollTo( element, x, y, speed )`, `scrollTo( x, y, speed )` |
-  | setter | `import { setter } from 'modux'` | The setter function |
-  | Sounds | `import { sonds } from 'modux'` | The sounds class instance |
-  | uid | `import { uid } from 'modux'` | The uid function |
+  | approx | `import { approx } from 'modux'` | Used to approximate a number to a certain number of decimals |
+  | cookie | `import { cookie } from 'modux'` | Contains cookie manipulation functions |
+  | DateTime | `import { DateTime } from 'modux'` | A Date class wrapper |
+  | extend | `import { extend } from 'modux'` | Extends an object with another object |
+  | font | `import { font } from 'modux'` | A font loader |
+  | getter | `import { getter } from 'modux'` | Used to return a deep value from an Object. Use the "." separator to check subobjects |
+  | html | `import { html } from 'modux'` | Convert string to html |
+  | isNumber | `import { isNumber } from 'modux'` | Checks if the value is a number |
+  | isObject | `import { isObject } from 'modux'` | Checks if the object is an Object |
+  | loader | `import { loader } from 'modux'` | The Loader class is used to preload files |
+  | logger | `import { logger } from 'modux'` | A wrapper for window.console |
+  | loop | `import { loop } from 'modux'` | Loop through a collection Object or Array |
+  | radians | `import { radians } from 'modux'` | Convert an angle from degrees to radians |
+  | rnd | `import { rnd } from 'modux'` | Generate a random number between two values |
+  | scroll | `import { scroll } from 'modux'` | A library used for scrolling window or an element |
+  | setter | `import { setter } from 'modux'` | Used to set a deep value from an Object |
+  | Sounds | `import { sonds } from 'modux'` | A class used to manipulate Sounds |
+  | uid | `import { uid } from 'modux'` | Generates a random unique identifier |

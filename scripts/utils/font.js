@@ -4,6 +4,11 @@
 import { html } from './html.js'
 import { loop } from './loop.js'
 
+/**
+ * Creates a font test container
+ * @param {String} name The name of the container
+ * @return {HTMLElement} The html tag containing the test text
+ */
 let createContainer = ( name ) => {
   let e = html( `
     <span id="modux-font-` + name + `" style="position: absolute; top: -500px">
@@ -16,6 +21,10 @@ let createContainer = ( name ) => {
   return e
 }
 
+/**
+ * Create an empty style tag containing the font to be used in testing
+ * @return {HTMLElement} The style tag which contains the font name
+ */
 let createBlankFont = () => {
   let e = html( `
   <style>
@@ -28,6 +37,13 @@ let createBlankFont = () => {
   return e
 }
 
+/**
+ * A font loader
+ * @param {String} font The font name to be loaded
+ * @param {Object} styles The styles to load, bold, italic, etc...
+ * @param {Number} interval The time in milliseconds it takes to retry the load
+ * @return {Promise} A promise that is resolved when the font is loaded
+ */
 export let font = ( font, styles, interval ) => {
   let blank = createBlankFont()
   document.getElementsByTagName( 'head' )[0].appendChild( blank )

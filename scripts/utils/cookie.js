@@ -2,6 +2,13 @@
 
 'use strict'
 
+/**
+ * Set a browser cookie
+ * @param {String} name Name of the cookie
+ * @param {String} value Value of the cookie
+ * @param {String} path The cookie path
+ * @param {Numeric} seconds The cookie lifetime
+ */
 let setCookie = ( name, value, path, seconds ) => {
   let expires
   if ( seconds ) {
@@ -14,6 +21,11 @@ let setCookie = ( name, value, path, seconds ) => {
   document.cookie = name + '=' + value + expires + '; path=' + ( path || '/' )
 }
 
+/**
+ * Returns the value of a browser cookie
+ * @param {String} name Name of the cookie to be retrieved
+ * @return {String} Returns the value of the cookie
+ */
 let getCookie = ( name ) => {
   name = name + '='
   var decodedCookie = decodeURIComponent( document.cookie )
@@ -30,6 +42,9 @@ let getCookie = ( name ) => {
   return ''
 }
 
+/**
+ * Returns cookie manipulation functions
+ */
 export let cookie = {
   set: setCookie,
   get: getCookie
