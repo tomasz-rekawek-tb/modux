@@ -38,7 +38,7 @@ export class Device {
     }
 
     /**
-     * Contains all the handlers bound to the window resize
+     * Calls all the handlers bound to the window resize
      * @type {Function}
      * @private
      */
@@ -48,7 +48,7 @@ export class Device {
     }
 
     /**
-     * Calls all the handlers bound
+     * The handler for resize
      * @type {Function}
      * @private
      */

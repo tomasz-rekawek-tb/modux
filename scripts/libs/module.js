@@ -97,7 +97,7 @@ export class Module {
    */
   __removeComponent ( element ) {
     if ( element.moduxComponent ) {
-      element.moduxComponent.destroy()
+      element.moduxComponent.__destroy()
     }
   }
 

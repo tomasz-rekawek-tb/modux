@@ -2,10 +2,15 @@
 
 const path = require( 'path' )
 const webpack = require( 'webpack' )
+
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' )
 const CopyWebpackPlugin = require( 'copy-webpack-plugin' )
 const UglifyJSPlugin = require( 'uglifyjs-webpack-plugin' )
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' )
+const ImageminPlugin = require( 'imagemin-webpack-plugin' ).default
+
+const SpeedMeasurePlugin = require( 'speed-measure-webpack-plugin' )
+const smp = new SpeedMeasurePlugin()
 
 module.exports = () => {
   let prod = false
@@ -28,6 +33,16 @@ module.exports = () => {
     new CopyWebpackPlugin( [
       { context: path.join( apps, 'public' ), from: '**/*', to: build }
     ] ),
+    new ImageminPlugin( {
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      disable: !prod,
+      jpegtran: {
+        progressive: true
+      },
+      pngquant: {
+        strip: true
+      }
+    } ),
     new webpack.DefinePlugin( { 'PRODUCTION': prod } )
   ]
 
@@ -39,9 +54,9 @@ module.exports = () => {
     plugins.push( new UglifyJSPlugin() )
   }
 
-  return {
+  return smp.wrap( {
     mode: ( prod ) ? 'production' : 'development',
-
+    stats: 'minimal',
     entry: {
       app: [
         path.join( apps, 'app.js' )
@@ -159,5 +174,5 @@ module.exports = () => {
     optimization: {
       usedExports: true
     }
-  }
+  } )
 }

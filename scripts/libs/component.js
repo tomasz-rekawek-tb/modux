@@ -20,6 +20,11 @@ export class Component {
    * @param {String} url The current url
    */
   stateChange ( url ) {}
+  /**
+   * The method gets called whenever the container is resized
+   * @param {String} orientation The device orientation
+   */
+  onResize ( orientation ) {}
 
   /**
    * The method gets called when the component gets created in the page. It is the main method of the class
@@ -34,8 +39,8 @@ export class Component {
   /**
    * Creates an instance of Component
    * @param {HTMLElement} parent The parent wrapper
-   * @param {Config} config A config class instance
-   * @param {Store} store A store class instance
+   * @param {Config} config A Config class instance
+   * @param {Store} store A Store class instance
    */
   constructor ( parent, config, store ) {
     /**
@@ -73,7 +78,6 @@ export class Component {
     // Append element to the dom
     this.parent.appendChild( this.element )
 
-    // Manage state change
     /**
      * The __stateWatcher is a handler for the router, it gets destroyed when the component gets destroyed
      * @type {String}
@@ -82,6 +86,37 @@ export class Component {
     this.__stateWatcher = Router.onStateChange( ( url ) => {
       this.stateChange( url )
     } )
+
+    /**
+     * Holds the previous width and height of the parent container
+     * @type {Object}
+     * @private
+     */
+    let previousParentSize = {}
+    /**
+     * Determines if the component watches for resize changes in parent dimensions
+     * @type {Boolean}
+     * @private
+     */
+    this.__resizeWatcher = true
+    /**
+     * This function checks for parent size changes every 100ms as long as the component exists
+     * @type {Function}
+     * @private
+     */
+    const parentResizeCheck = () => {
+      setTimeout( () => {
+        if ( this.__resizeWatcher ) {
+          if ( previousParentSize.width !== this.parent.clientWidth || previousParentSize.height !== this.parent.clientHeight ) {
+            previousParentSize.width = this.parent.clientWidth
+            previousParentSize.height = this.parent.clientHeight
+            this.onResize( previousParentSize.width, previousParentSize.height )
+          }
+          parentResizeCheck()
+        }
+      }, 100 )
+    }
+    parentResizeCheck()
 
     // Execute component
     this.execute()
@@ -92,6 +127,7 @@ export class Component {
    */
   __destroy () {
     this.__stateWatcher()
+    this.__resizeWatcher = false
     this.terminate()
     try {
       this.element.remove()
