@@ -24,7 +24,7 @@ To run use: `npm test` or `npm run build`
 In order to support older versions of browsers, you can use polyfills:
 
 ```
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,MutationObserver,console.info,es5,es6,Audio"></script>
+    <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2CMutationObserver%2CString.prototype.padStart%2Cconsole.info"></script>
 ```
 
 ## Modux classes

@@ -1,6 +1,16 @@
 'use strict'
 
-import { Component } from './../../../../scripts'
+import { Component, loop } from './../../../../scripts'
+
+import Approx from './../utils/approx'
+import Cookie from './../utils/cookie'
+import DateTime from './../utils/datetime'
+
+const dependencies = {
+  approx: Approx,
+  cookie: Cookie,
+  datetime: DateTime
+}
 
 const template = require( './template.html' )
 
@@ -9,20 +19,29 @@ export class Layout extends Component {
     return template
   }
 
-  onResize ( width, height ) {
-    console.log( 'Layout size: ', width, ' x ', height )
+  loadComponent ( name ) {
+    if ( !dependencies[ name ] ) {
+      return
+    }
+
+    let container = this.element.querySelector( '.container' )
+
+    this.config.get( 'app' ).addDependency( name, dependencies[ name ] )
+    container.innerHTML = '<section data-modux-component="' + name + '"></section>'
+    setTimeout( () => {
+      this.config.get( 'app' ).removeDependency( name )
+    } )
   }
 
   stateChange ( url ) {
-    let container = this.element.querySelector( '.container' )
-
-    switch ( url ) {
-      case '/approx':
-        container.innerHTML = '<div>approx</div>'
-        break
-      case '/cookie':
-        container.innerHTML = '<div>cookie</div>'
-        break
-    }
+    // Update active menu
+    loop( this.element.querySelectorAll( 'nav .menu-item' ), ( item ) => {
+      if ( url === item.getAttribute( 'href' ) ) {
+        item.classList.add( 'active' )
+      } else {
+        item.classList.remove( 'active' )
+      }
+    } )
+    this.loadComponent( url.substr( 1 ) )
   }
 }

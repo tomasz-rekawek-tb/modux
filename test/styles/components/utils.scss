@@ -1,65 +1,76 @@
-.utils {
+article {
     display: block;
-    border: 1px solid #000;
-    padding: 1rem;
-    width: 100%;
+    color: #000;
+    font-size: 0;
+    border: 1px solid #666;
+    background: #F1F1F1;
+    margin: 0 auto 1rem auto;
     box-sizing: border-box;
-    color: #333;
-    background-color: #efefef;
-    margin-bottom: 1em;
 
-    .title {
-        font-family: 'arial';
-        font-weight: bold;
-        font-size: 1.2em;
-        cursor: pointer;
-
-        .text {
-            display: inline-block;
-            vertical-align: top;
-        }
-
-        .status {
-            display: inline-block;
-            vertical-align: top;
-            width: 1em;
-            height: 1em;
-            border: 1px solid #666;
-            margin-right: 1em;    
-            background-color: #CC3;
-
-            &.success {
-                background-color: #3C3;
-            }
-            &.error {
-                background-color: #F66;
-            }
-        }
+    .description {
+        display: block;
+        font-weight: normal;
+        font-size: 1.2rem;
+        padding: 1rem 0.5rem;
+        box-sizing: border-box;
     }
 
-    .details {
+    .step {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
 
-        .features {
-            font-family: 'arial';
+        .test {
+            display: block;
+            color: #FFFFFF;
+            background-color: #999999;
+            width: calc(70% - 0.75rem);
+            font-size: 1rem;
+            margin: 0 0.25rem 0.5rem 0.5rem;
+            padding: 0.5rem;
+            box-sizing: border-box;
 
-            li {
-                list-style: none;
-                color: #fff;
-                padding: 0.5em;
-                margin: 2px;
-                box-sizing: border-box;
-                background-color: #CC3;
+            .field {
+                display: flex;
+                margin: 0.25rem 0;
 
-                .output {
-                    padding-left: 4em;
+                input {
+                    width: 100%;
+                    box-sizing: border-box;
+                    border: 1px solid #333;
+                    font-size: 1rem;
+                    padding: 0.3rem;
+    
                 }
+    
+                input[type="button"] {
+                    display: inline-block;
+                    width: auto;
+                    box-sizing: border-box;
+                    border: 1px solid #333;
+                    background-color: #EDEDED;
+                    font-size: 1rem;
+                    padding: 0.3rem 1rem;
+                }
+            }
+        }
+        .output {
+            display: block;
+            background-color: #FFFFFF;
+            border: 1px solid #999999;
+            width: calc(30% - 0.75rem);
+            font-size: 1rem;
+            margin: 0 0.5rem 0.5rem 0.25rem;
+            padding: 0.5rem;
+            box-sizing: border-box;
+            word-break: break-word;
 
-                &.error {
-                    background-color: #F66;
-                }
-                &.success {
-                    background-color: #3C3;
-                }
+            &.true {
+                background-color: #CCFFCC;
+            }
+            &.false {
+                background-color: #FFCCCC;
             }
         }
     }

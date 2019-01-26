@@ -9,7 +9,18 @@ export class DateTime extends Date {
    * @return {String}
    */
   toString () {
-    return this.toISOString().slice( 0, 19 ).replace( 'T', ' ' )
+    return '' +
+      this.getFullYear() +
+      '-' +
+      ( this.getMonth() + 1 ).toString().padStart( 2, '0' ) +
+      '-' +
+      this.getDate().toString().padStart( 2, '0' ) +
+      ' ' +
+      this.getHours().toString().padStart( 2, '0' ) +
+      ':' +
+      this.getMinutes().toString().padStart( 2, '0' ) +
+      ':' +
+      this.getSeconds().toString().padStart( 2, '0' )
   }
 
   /**
@@ -17,7 +28,14 @@ export class DateTime extends Date {
    * @return {String}
    */
   toTime () {
-    return this.toISOString().slice( 11, 23 )
+    return '' +
+      this.getHours().toString().padStart( 2, '0' ) +
+      ':' +
+      this.getMinutes().toString().padStart( 2, '0' ) +
+      ':' +
+      this.getSeconds().toString().padStart( 2, '0' ) +
+      '.' +
+      this.getMilliseconds().toString().padStart( 3, '0' )
   }
 
   /**
@@ -25,19 +43,12 @@ export class DateTime extends Date {
    * @return {String}
    */
   toDate () {
-    return this.toISOString().slice( 0, 10 )
-  }
-
-  /**
-   * Returns the duration since the start in the XX days HH:MM:ss format
-   * @param {Date} start The start date
-   * @return {String}
-   */
-  duration ( start ) {
-    let timePassed = this.getTime() - start.getTime()
-    let days = Math.floor( timePassed / ( 24 * 60 * 60 * 1000 ) )
-    let time = timePassed % ( 24 * 60 * 60 * 1000 )
-    return days + ' days ' + ( new DateTime( time ) ).toTime()
+    return '' +
+      this.getFullYear() +
+      '-' +
+      ( this.getMonth() + 1 ).toString().padStart( 2, '0' ) +
+      '-' +
+      this.getDate().toString().padStart( 2, '0' )
   }
 
   /**

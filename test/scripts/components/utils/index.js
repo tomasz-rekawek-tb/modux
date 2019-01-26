@@ -1,76 +1,45 @@
 'use strict'
 
-import { Component, loop, html } from './../../../../scripts'
+import { Component, html } from './../../../../scripts'
 
 const template = require( './template.html' )
 
-export class Index extends Component {
+const test = require( './test.html' )
+const step = require( './step.html' )
+
+export class Utils extends Component {
   get template () {
     return template
   }
 
-  get name () {
-    return 'Utils'
-  }
-
-  get features () {
-    return []
-  }
-
-  createFeature ( description, index ) {
-    return html( '<li><b>Step ' + index + ':</b> ' + description + '<div class="output"></div></li>' )
-  }
-
-  execute () {
-    let title = this.element.querySelector( '.title' )
-    let details = this.element.querySelector( '.details' )
-
-    details.style.display = 'none'
-
-    title.addEventListener( 'click', () => {
-      if ( details.style.display === 'none' ) {
-        details.style.display = 'block'
-      } else {
-        details.style.display = 'none'
-      }
-    } )
-
-    title.querySelector( '.text' ).innerHTML = this.name
-
-    let features = this.element.querySelector( '.features' )
-
-    let processed = 0
-    let allGood = true
-    let checkStatus = () => {
-      if ( processed === this.features.length ) {
-        if ( allGood ) {
-          title.querySelector( '.status' ).classList.add( 'success' )
+  _createStep ( input, promiseExec, promiseResult ) {
+    let step = this._createStepElement( html( '<span>' + input + '</span>' ), html( 'running...' ) )
+    Promise.all( [ promiseExec(), promiseResult() ] )
+      .then( ( values ) => {
+        step.querySelector( '.output' ).innerHTML = values[ 0 ]
+        if ( values[ 0 ] === values[ 1 ] ) {
+          step.querySelector( '.output' ).className = 'output true'
         } else {
-          title.querySelector( '.status' ).classList.add( 'error' )
+          step.querySelector( '.output' ).className = 'output false'
         }
-      }
-    }
+      } )
+      .catch( ( err ) => {
+        step.querySelector( '.output' ).innerHTML = err.message
+        step.querySelector( '.output' ).className = 'output false'
+      } )
+    return step
+  }
 
-    loop( this.features, ( feature, index ) => {
-      let e = this.createFeature( feature.description, index + 1 )
-      features.appendChild( e )
+  _createStepElement ( htmlTest, htmlOutput ) {
+    let tmpl = html( step )
+    tmpl.querySelector( '.test' ).appendChild( htmlTest )
+    tmpl.querySelector( '.output' ).appendChild( htmlOutput )
+    return tmpl
+  }
 
-      feature.result()
-        .then( ( success ) => {
-          e.classList.add( 'success' )
-          e.classList.remove( 'error' )
-          e.querySelector( '.output' ).innerHTML = '' + success || ''
-          processed++
-          checkStatus()
-        } )
-        .catch( ( err ) => {
-          e.classList.add( 'error' )
-          e.classList.remove( 'success' )
-          e.querySelector( '.output' ).innerHTML = '' + err || ''
-          allGood = false
-          processed++
-          checkStatus()
-        } )
-    } )
+  _createTestElement ( description ) {
+    let tmpl = html( test )
+    tmpl.querySelector( '.description' ).innerHTML = description
+    return tmpl
   }
 }

@@ -7,5 +7,5 @@
  * @return {String} A new number
  */
 export let approx = ( num, decimals ) => {
-  return Number.parseFloat( num ).toFixed( decimals )
+  return parseFloat( num ).toFixed( decimals )
 }

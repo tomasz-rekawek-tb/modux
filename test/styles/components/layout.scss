@@ -22,6 +22,11 @@
             margin: 1px 0;
             cursor: pointer;
             text-decoration: none;
+
+            &.active {
+                background-color: #999999;
+                color: #ffffff;
+            }
         }
     }
 
@@ -30,5 +35,6 @@
         width: 100%;
         padding: 1rem;
         box-sizing: border-box;
+        background-color: #ccefcc;
     }
 }

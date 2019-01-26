@@ -121,13 +121,7 @@ module.exports = () => {
           test: /\.inline\.scss$/,
           use: [
             {
-              loader: 'style-loader/useable'
-            },
-            {
-              loader: 'css-loader',
-              options: {
-                url: false
-              }
+              loader: 'raw-loader'
             },
             {
               loader: 'sass-loader',
