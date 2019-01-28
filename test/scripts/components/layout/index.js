@@ -5,11 +5,15 @@ import { Component, loop } from './../../../../scripts'
 import Approx from './../utils/approx'
 import Cookie from './../utils/cookie'
 import DateTime from './../utils/datetime'
+import Extend from './../utils/extend'
+import Font from './../utils/font'
 
 const dependencies = {
   approx: Approx,
   cookie: Cookie,
-  datetime: DateTime
+  datetime: DateTime,
+  extend: Extend,
+  font: Font
 }
 
 const template = require( './template.html' )

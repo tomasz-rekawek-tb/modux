@@ -14,18 +14,19 @@ export class Utils extends Component {
 
   _createStep ( input, promiseExec, promiseResult ) {
     let step = this._createStepElement( html( '<span>' + input + '</span>' ), html( 'running...' ) )
-    Promise.all( [ promiseExec(), promiseResult() ] )
+    let output = step.querySelector( '.output' )
+    Promise.all( [ promiseExec( step.querySelector( '.process' ) ), promiseResult() ] )
       .then( ( values ) => {
-        step.querySelector( '.output' ).innerHTML = values[ 0 ]
+        output.innerHTML = values[ 0 ]
         if ( values[ 0 ] === values[ 1 ] ) {
-          step.querySelector( '.output' ).className = 'output true'
+          output.className = 'output true'
         } else {
-          step.querySelector( '.output' ).className = 'output false'
+          output.className = 'output false'
         }
       } )
       .catch( ( err ) => {
-        step.querySelector( '.output' ).innerHTML = err.message
-        step.querySelector( '.output' ).className = 'output false'
+        output.innerHTML = err.message
+        output.className = 'output false'
       } )
     return step
   }
