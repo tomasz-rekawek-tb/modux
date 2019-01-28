@@ -39,7 +39,7 @@ let createBlankFont = () => {
 }
 
 /**
- * A font loader
+ * A function to check if a font has been loaded
  * @param {String} font The font name to be loaded
  * @param {Object} styles The styles to load, bold, italic, etc...
  * @param {Number} interval The time in milliseconds it takes to retry the load
