@@ -18,15 +18,13 @@ export default class Index extends Utils {
           &nbsp;&nbsp;&nbsp;&nbsp;resolve( 'Font loaded' )<br/>
           &nbsp;&nbsp;} )
         `,
-        ( element ) => {
-          return new Promise( ( resolve ) => {
-            element.innerHTML = `<style>@import url('https://fonts.googleapis.com/css?family=Indie+Flower');</style>`
-            font( 'Indie Flower' )
-              .then( () => {
-                resolve( 'Font loaded' )
-              } )
-          } )
-        },
+        ( element ) => new Promise( ( resolve ) => {
+          element.innerHTML = `<style>@import url('https://fonts.googleapis.com/css?family=Indie+Flower');</style>`
+          font( 'Indie Flower' )
+            .then( () => {
+              resolve( 'Font loaded' )
+            } )
+        } ),
         () => Promise.resolve( 'Font loaded' )
       )
     )
@@ -43,18 +41,15 @@ export default class Index extends Utils {
           &nbsp;&nbsp;&nbsp;&nbsp;resolve( 'Font not found' )<br/>
           &nbsp;&nbsp;} )
         `,
-        () => {
-          return new Promise( ( resolve ) => {
-            font( 'No font', null, null, 10 )
-              .then( () => {
-                console.log( 'xxx' )
-                resolve( 'Font loaded' )
-              } )
-              .catch( () => {
-                resolve( 'Font not found' )
-              } )
-          } )
-        },
+        () => new Promise( ( resolve ) => {
+          font( 'No font', null, null, 10 )
+            .then( () => {
+              resolve( 'Font loaded' )
+            } )
+            .catch( () => {
+              resolve( 'Font not found' )
+            } )
+        } ),
         () => Promise.resolve( 'Font not found' )
       )
     )

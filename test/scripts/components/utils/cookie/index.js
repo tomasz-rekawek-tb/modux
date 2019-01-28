@@ -31,18 +31,16 @@ export default class Index extends Utils {
           cookie.set( 'cookie-test', 'success' )
           return Promise.resolve( 'Cookie was set correctly' )
         },
-        () => {
-          return new Promise( ( resolve ) => {
-            if ( this.__getCookie( 'cookie-test' ) === 'success' ) {
-              resolve( 'Cookie was set correctly' )
-            } else {
-              resolve( 'Did not find the cookie' )
-            }
+        () => new Promise( ( resolve ) => {
+          if ( this.__getCookie( 'cookie-test' ) === 'success' ) {
+            resolve( 'Cookie was set correctly' )
+          } else {
+            resolve( 'Did not find the cookie' )
+          }
 
-            // Test is done, delete the cookie
-            cookie.set( 'cookie-test', 'success', '/', -1000 )
-          } )
-        }
+          // Test is done, delete the cookie
+          cookie.set( 'cookie-test', 'success', '/', -1000 )
+        } )
       )
     )
 
@@ -54,18 +52,16 @@ export default class Index extends Utils {
           cookie.set( 'cookie-test', 'success', '/' )
           return Promise.resolve( 'Cookie was set correctly' )
         },
-        () => {
-          return new Promise( ( resolve ) => {
-            if ( this.__getCookie( 'cookie-test' ) === 'success' ) {
-              resolve( 'Cookie was set correctly' )
-            } else {
-              resolve( 'Did not find the cookie' )
-            }
+        () => new Promise( ( resolve ) => {
+          if ( this.__getCookie( 'cookie-test' ) === 'success' ) {
+            resolve( 'Cookie was set correctly' )
+          } else {
+            resolve( 'Did not find the cookie' )
+          }
 
-            // Test is done, delete the cookie
-            cookie.set( 'cookie-test', 'success', '/', -1000 )
-          } )
-        }
+          // Test is done, delete the cookie
+          cookie.set( 'cookie-test', 'success', '/', -1000 )
+        } )
       )
     )
 
@@ -77,18 +73,16 @@ export default class Index extends Utils {
           cookie.set( 'cookie-test', 'success', '/', 100 )
           return Promise.resolve( 'Cookie was set correctly' )
         },
-        () => {
-          return new Promise( ( resolve ) => {
-            if ( this.__getCookie( 'cookie-test' ) === 'success' ) {
-              resolve( 'Cookie was set correctly' )
-            } else {
-              resolve( 'Did not find the cookie' )
-            }
+        () => new Promise( ( resolve ) => {
+          if ( this.__getCookie( 'cookie-test' ) === 'success' ) {
+            resolve( 'Cookie was set correctly' )
+          } else {
+            resolve( 'Did not find the cookie' )
+          }
 
-            // Test is done, delete the cookie
-            cookie.set( 'cookie-test', 'success', '/', -1000 )
-          } )
-        }
+          // Test is done, delete the cookie
+          cookie.set( 'cookie-test', 'success', '/', -1000 )
+        } )
       )
     )
 
@@ -101,15 +95,13 @@ export default class Index extends Utils {
           cookie.set( 'cookie-test', 'success', null, -1000 )
           return Promise.resolve( 'Cookie was created and then deleted' )
         },
-        () => {
-          return new Promise( ( resolve ) => {
-            if ( this.__getCookie( 'cookie-test' ) === 'success' ) {
-              resolve( 'Cookie was not deleted properly' )
-            } else {
-              resolve( 'Cookie was created and then deleted' )
-            }
-          } )
-        }
+        () => new Promise( ( resolve ) => {
+          if ( this.__getCookie( 'cookie-test' ) === 'success' ) {
+            resolve( 'Cookie was not deleted properly' )
+          } else {
+            resolve( 'Cookie was created and then deleted' )
+          }
+        } )
       )
     )
 
@@ -123,14 +115,12 @@ export default class Index extends Utils {
           cookie.set( 'cookie-test', 'success', null, 100 )
           return Promise.resolve( ( cookie.get( 'cookie-test' ) === 'success' ) ? 'Cookie was created and found' : 'Cookie was not found' )
         },
-        () => {
-          return new Promise( ( resolve ) => {
-            resolve( 'Cookie was created and found' )
+        () => new Promise( ( resolve ) => {
+          resolve( 'Cookie was created and found' )
 
-            // Test is done, delete the cookie
-            cookie.set( 'cookie-test', 'success', null, -1000 )
-          } )
-        }
+          // Test is done, delete the cookie
+          cookie.set( 'cookie-test', 'success', null, -1000 )
+        } )
       )
     )
 

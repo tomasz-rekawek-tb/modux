@@ -110,7 +110,7 @@ class Loader {
       }
 
       if ( total === 0 ) {
-        return resolve( 0 )
+        resolve( 0 )
       }
 
       loop( files, ( file, id ) => {

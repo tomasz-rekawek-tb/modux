@@ -7,13 +7,23 @@ import Cookie from './../utils/cookie'
 import DateTime from './../utils/datetime'
 import Extend from './../utils/extend'
 import Font from './../utils/font'
+import Getter from './../utils/getter'
+import Html from './../utils/html'
+import Isnumber from './../utils/isnumber'
+import Isobject from './../utils/isobject'
+import Loader from './../utils/loader'
 
 const dependencies = {
   approx: Approx,
   cookie: Cookie,
   datetime: DateTime,
   extend: Extend,
-  font: Font
+  font: Font,
+  getter: Getter,
+  html: Html,
+  isnumber: Isnumber,
+  isobject: Isobject,
+  loader: Loader
 }
 
 const template = require( './template.html' )

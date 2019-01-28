@@ -84,6 +84,6 @@ export let font = ( font, styles, interval, attempts ) => {
     // Delay to allow AdobeBlank font to load
     setTimeout( () => {
       timer()
-    } )
+    }, 500 )
   } )
 }
