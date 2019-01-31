@@ -74,8 +74,6 @@ export class Router {
     baseEnabled = !!enabled
   }
 
-  // <base href="http://www.example.com/page.html"></base>
-
   /**
    * A static method used to push a new state
    * @param {String} url The new url
