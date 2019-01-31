@@ -1,7 +1,7 @@
 .page {
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    min-height: 100vh;
 
     nav {
         display: block;
@@ -32,9 +32,56 @@
 
     .container {
         display: block;
+        position: relative;
         width: 100%;
-        padding: 1rem;
-        box-sizing: border-box;
         background-color: #ccefcc;
+        padding-top: 2rem;
+
+        .module {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+    }
+
+    .button-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 2rem;
+        height: 4rem;
+        border: 1px solid #ccc;
+        color: #FFFFFF;
+        background-color: #666;
+        text-decoration: none;
+        font-size: 2rem;
+        text-align: center;
+        line-height: 4rem;
+    }
+
+    @include bp-l {
+        nav {
+            display: none;
+            max-width: 100%;
+        }
+
+        .container {
+            display: block;
+        }
+
+        .button-menu {
+            display: inline-block;
+        }
+
+        &.menu-open {
+            nav {
+                display: block;
+            }
+            .container {
+                display: none;
+            }
+        }
     }
 }

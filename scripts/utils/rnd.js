@@ -7,5 +7,5 @@
  * @return {Number} The random number generated
  */
 export let rnd = ( min, max ) => {
-  return Math.floor( Math.random() * ( max - min + 1 ) ) + min
+  return Math.floor( Math.random() * ( Math.floor( max ) - Math.ceil( min ) + 1 ) ) + Math.ceil( min )
 }

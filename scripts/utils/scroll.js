@@ -8,21 +8,26 @@ import { approx } from './approx.js'
  * Scroll window to position
  * @param {Number} x The x position
  * @param {Number} y The y position
- * @param {Number} speed The scroll speed
+ * @param {Number} cycles The scroll cycles needed to reach destination
  */
-let scrollTo = ( x, y, speed ) => {
+let scrollTo = ( x, y, cycles ) => {
   let positionX = window.scrollX
   let positionY = window.scrollY
-  speed = speed || 100
-  let scroll = () => {
-    let limitX = Math.abs( positionX - x )
-    let limitY = Math.abs( positionY - y )
-    positionX = approx( positionX + ( ( x - positionX ) / Math.abs( x - positionX ) ) * ( limitX * speed / 100 ), 2 )
-    positionY = approx( positionY + ( ( y - positionY ) / Math.abs( y - positionY ) ) * ( limitY * speed / 100 ), 2 )
 
-    if ( Math.abs( parseInt( positionX ) - parseInt( x ) ) > 1 || Math.abs( parseInt( positionY ) - parseInt( y ) ) > 1 ) {
-      window.scrollTo( positionX, positionY )
+  cycles = cycles || 1 // Default value is instant scroll
+
+  let speedLeft = ( x - positionX ) / cycles
+  let speedTop = ( y - positionY ) / cycles
+
+  let scroll = () => {
+    cycles--
+    if ( cycles >= 0 ) {
+      positionX += speedLeft
+      positionY += speedTop
+      window.scrollTo( approx( positionX, 0 ), approx( positionY, 0 ) )
       requestAnimationFrame( scroll )
+    } else {
+      window.scrollTo( x, y )
     }
   }
   scroll()
@@ -33,22 +38,27 @@ let scrollTo = ( x, y, speed ) => {
  * @param {HTMLElement} element
  * @param {Number} x The x position
  * @param {Number} y The y position
- * @param {Number} speed The scroll speed
+ * @param {Number} cycles The scroll cycles needed to reach destination
  */
-let elementScrollTo = ( element, x, y, speed ) => {
+let elementScrollTo = ( element, x, y, cycles ) => {
   let positionX = element.scrollLeft
   let positionY = element.scrollTop
-  speed = speed || 100
-  let scroll = () => {
-    let limitX = Math.abs( positionX - x )
-    let limitY = Math.abs( positionY - y )
-    positionX = approx( positionX + ( ( x - positionX ) / Math.abs( x - positionX ) ) * ( limitX * speed / 100 ), 2 )
-    positionY = approx( positionY + ( ( y - positionY ) / Math.abs( y - positionY ) ) * ( limitY * speed / 100 ), 2 )
+  cycles = cycles || 1 // Default value is instant scroll
 
-    if ( Math.abs( parseInt( positionX ) - parseInt( x ) ) > 1 || Math.abs( parseInt( positionY ) - parseInt( y ) ) > 1 ) {
-      element.scrollLeft = positionX
-      element.scrollTop = positionY
+  let speedLeft = ( x - positionX ) / cycles
+  let speedTop = ( y - positionY ) / cycles
+
+  let scroll = () => {
+    cycles--
+    if ( cycles >= 0 ) {
+      positionX += speedLeft
+      positionY += speedTop
+      element.scrollLeft = approx( positionX, 0 )
+      element.scrollTop = approx( positionY, 0 )
       requestAnimationFrame( scroll )
+    } else {
+      element.scrollLeft = x
+      element.scrollTop = y
     }
   }
   scroll()

@@ -2,7 +2,7 @@
 
 'use strict'
 
-import { Module, config, logger } from './../../scripts'
+import { Module, config, Router, logger } from './../../scripts'
 
 import { Layout } from './components/layout'
 
@@ -21,6 +21,7 @@ let initialize = () => {
   app.__config.set( 'app', app )
 
   // Start application
+  Router.setDynamicBase( true )
   app.bootstrap( document.querySelector( 'body' ), 'layout' )
 }
 

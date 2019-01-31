@@ -12,6 +12,14 @@ import Html from './../utils/html'
 import Isnumber from './../utils/isnumber'
 import Isobject from './../utils/isobject'
 import Loader from './../utils/loader'
+import Logger from './../utils/logger'
+import Loop from './../utils/loop'
+import Radians from './../utils/radians'
+import Rnd from './../utils/rnd'
+import Scroll from './../utils/scroll'
+import Setter from './../utils/setter'
+import Sounds from './../utils/sounds'
+import Uid from './../utils/uid'
 
 const dependencies = {
   approx: Approx,
@@ -23,7 +31,15 @@ const dependencies = {
   html: Html,
   isnumber: Isnumber,
   isobject: Isobject,
-  loader: Loader
+  loader: Loader,
+  logger: Logger,
+  loop: Loop,
+  radians: Radians,
+  rnd: Rnd,
+  scroll: Scroll,
+  setter: Setter,
+  sounds: Sounds,
+  uid: Uid
 }
 
 const template = require( './template.html' )
@@ -38,24 +54,32 @@ export class Layout extends Component {
       return
     }
 
-    let container = this.element.querySelector( '.container' )
+    let module = this.element.querySelector( '.module' )
 
     this.config.get( 'app' ).addDependency( name, dependencies[ name ] )
-    container.innerHTML = '<section data-modux-component="' + name + '"></section>'
+    module.innerHTML = '<section data-modux-component="' + name + '"></section>'
     setTimeout( () => {
       this.config.get( 'app' ).removeDependency( name )
     } )
   }
 
   stateChange ( url ) {
+    let urlData = url.split( '#' )
+
     // Update active menu
     loop( this.element.querySelectorAll( 'nav .menu-item' ), ( item ) => {
-      if ( url === item.getAttribute( 'href' ) ) {
+      if ( urlData[ 0 ] === item.getAttribute( 'href' ) ) {
         item.classList.add( 'active' )
       } else {
         item.classList.remove( 'active' )
       }
+
+      if ( urlData[ 1 ] === 'menu' ) {
+        this.element.classList.add( 'menu-open' )
+      } else {
+        this.element.classList.remove( 'menu-open' )
+      }
     } )
-    this.loadComponent( url.substr( 1 ) )
+    this.loadComponent( urlData[ 0 ].substr( 1 ) )
   }
 }

@@ -30,6 +30,7 @@ article {
             margin: 0 0.25rem 0.5rem 0.5rem;
             padding: 0.5rem;
             box-sizing: border-box;
+            overflow: auto;
 
             .field {
                 display: flex;
@@ -76,6 +77,7 @@ article {
             box-sizing: border-box;
             word-break: break-word;
             white-space: pre-wrap;
+            overflow: auto;
 
             &.true {
                 background-color: #CCFFCC;
@@ -88,5 +90,24 @@ article {
         .process {
             display: none;
         }
+
+        @include bp-l {
+            display: block;
+
+            .test {
+                width: 96%;
+                margin: 0.5rem auto;
+
+                .field {
+                    display: block;
+                }
+            }
+
+            .output {
+                width: 96%;
+                margin: 0.5rem auto;
+            }
+        }
+
     }
 }
