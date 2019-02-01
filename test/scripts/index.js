@@ -13,6 +13,8 @@ let initialize = () => {
 
   logger.info( 'Application start' )
 
+  Router.setDynamicBase( true )
+
   // Create application
   let app = new Module( 'app' )
   app
@@ -21,7 +23,6 @@ let initialize = () => {
   app.__config.set( 'app', app )
 
   // Start application
-  Router.setDynamicBase( true )
   app.bootstrap( document.querySelector( 'body' ), 'layout' )
 }
 

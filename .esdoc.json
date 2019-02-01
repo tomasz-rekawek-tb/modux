@@ -5,8 +5,18 @@
     {
       "name": "esdoc-standard-plugin",
       "option": {
-        "coverage": {"enable": true},
-        "accessor": {"access": ["public", "protected", "package"], "autoPrivate": true}
+        "coverage": { "enable": true },
+        "accessor": { "access": [ "public", "protected", "package" ], "autoPrivate": true },
+        "manual": {
+          "index": "./README.md",
+          "globalIndex": true,
+          "files": [
+            "./manual/basic-usage.md",
+            "./manual/basic-usage-config.md",
+            "./manual/basic-usage-store.md",
+            "./manual/basic-usage-router.md"
+          ]
+        }
       }
     }
   ]

@@ -78,8 +78,7 @@ export default class Index extends Utils {
         let output = []<br/>
         resources.preload( {<br/>
         &nbsp;&nbsp;image2: { type: 'image', url: '/image2.png' },<br/>
-        &nbsp;&nbsp;image3: { type: 'image', url: '/image3.png' },<br/>
-        &nbsp;&nbsp;audio: { type: 'audio', url: '/audio.wav' }<br/>
+        &nbsp;&nbsp;audio: { type: 'audio', url: '/ding.wav' }<br/>
         }, ( err, id, data, loaded, total ) => {<br/>
         &nbsp;&nbsp;output.push( { err: err, id: id, loaded: loaded, total: total } )<br/>
         } )<br/>
@@ -93,8 +92,7 @@ export default class Index extends Utils {
             let output = []
             resources.preload( {
               image2: { type: 'image', url: '/image2.png' },
-              image3: { type: 'image', url: '/image3.png' },
-              audio: { type: 'audio', url: '/audio.wav' }
+              audio: { type: 'audio', url: '/ding.wav' }
             }, ( err, id, data, loaded, total ) => {
               output.push( { err: err, id: id, loaded: loaded, total: total } )
             } )
@@ -104,9 +102,8 @@ export default class Index extends Utils {
           } )
         },
         () => Promise.resolve( JSON.stringify( [
-          { err: null, id: 'image2', loaded: 1, total: 3 },
-          { err: null, id: 'image3', loaded: 2, total: 3 },
-          { err: null, id: 'audio', loaded: 3, total: 3 }
+          { err: null, id: 'image2', loaded: 1, total: 2 },
+          { err: null, id: 'audio', loaded: 2, total: 2 }
         ], null, 4 ) )
       )
     )
