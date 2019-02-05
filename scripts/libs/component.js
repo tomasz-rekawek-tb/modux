@@ -119,9 +119,6 @@ export class Component {
       }, 100 )
     }
     parentResizeCheck()
-
-    // Execute component
-    this.execute()
   }
 
   /**

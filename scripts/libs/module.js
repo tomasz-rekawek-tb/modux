@@ -88,6 +88,7 @@ export class Module {
   __createComponent ( element, Component ) {
     if ( !element.moduxComponent ) {
       element.moduxComponent = new Component( element, this.__config, this.__store )
+      element.moduxComponent.execute()
     }
   }
 
@@ -200,6 +201,7 @@ export class Module {
      */
     this.__component = new this.__dependencies[ component ]( element, this.__config, this.__store )
     element.moduxComponent = this.__component
+    element.moduxComponent.execute()
   }
 
   /**
