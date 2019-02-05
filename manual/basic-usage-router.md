@@ -26,7 +26,7 @@ export class Layout extends Component {
     return template
   }
 
-  stateChange ( url ) {
+  onStateChange ( url ) {
     this.element.querySelector('.url').innerHTML = url
   }
 }

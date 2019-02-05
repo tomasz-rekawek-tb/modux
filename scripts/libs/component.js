@@ -19,12 +19,14 @@ export class Component {
    * The method gets called whenever the state changes
    * @param {String} url The current url
    */
-  stateChange ( url ) {}
+  onStateChange ( url ) {}
+
   /**
    * The method gets called whenever the container is resized
-   * @param {String} orientation The device orientation
+   * @param {Number} width The width of the container
+   * @param {Number} height The height of the container
    */
-  onResize ( orientation ) {}
+  onResize ( width, height ) {}
 
   /**
    * The method gets called when the component gets created in the page. It is the main method of the class
@@ -84,7 +86,7 @@ export class Component {
      * @private
      */
     this.__stateWatcher = Router.onStateChange( ( url ) => {
-      this.stateChange( url )
+      this.__onStateChange( url )
     } )
 
     /**
@@ -110,7 +112,7 @@ export class Component {
           if ( previousParentSize.width !== this.parent.clientWidth || previousParentSize.height !== this.parent.clientHeight ) {
             previousParentSize.width = this.parent.clientWidth
             previousParentSize.height = this.parent.clientHeight
-            this.onResize( previousParentSize.width, previousParentSize.height )
+            this.__onResize( previousParentSize.width, previousParentSize.height )
           }
           parentResizeCheck()
         }
@@ -120,6 +122,25 @@ export class Component {
 
     // Execute component
     this.execute()
+  }
+
+  /**
+   * The method gets called whenever the state changes
+   * @param {String} url The current url
+   * @private
+   */
+  __onStateChange ( url ) {
+    this.onStateChange( url )
+  }
+
+  /**
+   * The method gets called whenever the container is resized
+   * @param {Number} width The width of the container
+   * @param {Number} height The height of the container
+   * @private
+   */
+  __onResize ( width, height ) {
+    this.onResize( width, height )
   }
 
   /**
