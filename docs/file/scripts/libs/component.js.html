@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">scripts/libs/component.js | modux</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A framework used in front end application creation"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="modux"><meta property="twitter:description" content="A framework used in front end application creation"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/CrispCode/modux.git"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#libs">libs</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/libs/communication.js~Communication.html">Communication</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/libs/component.js~Component.html">Component</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/libs/config.js~Config.html">Config</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/libs/device.js~Device.html">Device</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/libs/module.js~Module.html">Module</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/libs/router.js~Router.html">Router</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/libs/store.js~Store.html">Store</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-config">config</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-store">store</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/utils/datetime.js~DateTime.html">DateTime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/utils/loader.js~Loader.html">Loader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/utils/sounds.js~Sounds.html">Sounds</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-approx">approx</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-extend">extend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-font">font</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getter">getter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-html">html</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isNumber">isNumber</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isObject">isObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loop">loop</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-radians">radians</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-rnd">rnd</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setter">setter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-uid">uid</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-cookie">cookie</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-loader">loader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-logger">logger</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-scroll">scroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sounds">sounds</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://github.com/adobe-fonts/adobe-blank">Adobe Blank</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">scripts/libs/component.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;
+
+import { html } from &apos;./../utils/html.js&apos;
+import { uid } from &apos;./../utils/uid.js&apos;
+import { Router } from &apos;./router.js&apos;
+
+/**
+ * This class is used to create web components
+ */
+export class Component {
+  /**
+   * The html string that becomes the view for this component
+   */
+  get template () {
+    return &apos;&apos;
+  }
+
+  /**
+   * The method gets called whenever the state changes
+   * @param {String} url The current url
+   */
+  onStateChange ( url ) {}
+
+  /**
+   * The method gets called whenever the container is resized
+   * @param {Number} width The width of the container
+   * @param {Number} height The height of the container
+   */
+  onResize ( width, height ) {}
+
+  /**
+   * The method gets called when the component gets created in the page. It is the main method of the class
+   */
+  execute () {}
+
+  /**
+   * The method gets called when the component calls destroy(). It can be used to remove handlers or clear timeouts
+   */
+  terminate () {}
+
+  /**
+   * Creates an instance of Component
+   * @param {HTMLElement} parent The parent wrapper
+   * @param {Config} config A Config class instance
+   * @param {Store} store A Store class instance
+   */
+  constructor ( parent, config, store ) {
+    /**
+     * A unique identifier
+     * @type {String}
+     * @public
+     */
+    this.uid = uid()
+    /**
+     * The parent wrapper
+     * @type {HTMLElement}
+     * @public
+     */
+    this.parent = parent
+    /**
+     * The component view
+     * @type {HTMLElement}
+     * @public
+     */
+    this.element = html( this.template )
+
+    /**
+     * The config class of the module parent
+     * @type {Config}
+     * @public
+     */
+    this.config = config
+    /**
+     * The store class of the module parent
+     * @type {Store}
+     * @public
+     */
+    this.store = store
+
+    // Append element to the dom
+    this.parent.appendChild( this.element )
+
+    /**
+     * The __stateWatcher is a handler for the router, it gets destroyed when the component gets destroyed
+     * @type {String}
+     * @private
+     */
+    this.__stateWatcher = Router.onStateChange( ( url ) =&gt; {
+      this.__onStateChange( url )
+    } )
+
+    /**
+     * Holds the previous width and height of the parent container
+     * @type {Object}
+     * @private
+     */
+    let previousParentSize = {}
+    /**
+     * Determines if the component watches for resize changes in parent dimensions
+     * @type {Boolean}
+     * @private
+     */
+    this.__resizeWatcher = true
+    /**
+     * This function checks for parent size changes every 100ms as long as the component exists
+     * @type {Function}
+     * @private
+     */
+    const parentResizeCheck = () =&gt; {
+      setTimeout( () =&gt; {
+        if ( this.__resizeWatcher ) {
+          if ( previousParentSize.width !== this.parent.clientWidth || previousParentSize.height !== this.parent.clientHeight ) {
+            previousParentSize.width = this.parent.clientWidth
+            previousParentSize.height = this.parent.clientHeight
+            this.__onResize( previousParentSize.width, previousParentSize.height )
+          }
+          parentResizeCheck()
+        }
+      }, 100 )
+    }
+    parentResizeCheck()
+  }
+
+  /**
+   * The method gets called whenever the state changes
+   * @param {String} url The current url
+   * @private
+   */
+  __onStateChange ( url ) {
+    this.onStateChange( url )
+  }
+
+  /**
+   * The method gets called whenever the container is resized
+   * @param {Number} width The width of the container
+   * @param {Number} height The height of the container
+   * @private
+   */
+  __onResize ( width, height ) {
+    this.onResize( width, height )
+  }
+
+  /**
+   * The method gets called when the component is destroyed
+   */
+  __destroy () {
+    this.__stateWatcher()
+    this.__resizeWatcher = false
+    this.terminate()
+    try {
+      this.element.remove()
+    } catch ( e ) {}
+    delete this.parent.moduxComponent
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
