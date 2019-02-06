@@ -13,7 +13,7 @@ export default class Index extends Utils {
       this._createStep(
         'approx( 123.98765, 3 )',
         () => Promise.resolve( approx( 123.98765, 3 ) ),
-        () => Promise.resolve( '123.988' )
+        () => Promise.resolve( 123.988 )
       )
     )
 
@@ -22,7 +22,7 @@ export default class Index extends Utils {
       this._createStep(
         'approx( Math.PI, 6 )',
         () => Promise.resolve( approx( Math.PI, 6 ) ),
-        () => Promise.resolve( '3.141593' )
+        () => Promise.resolve( 3.141593 )
       )
     )
 
@@ -31,7 +31,7 @@ export default class Index extends Utils {
       this._createStep(
         'approx( 0.0909 / 123123, 6 )',
         () => Promise.resolve( approx( 0.0909 / 123123, 6 ) ),
-        () => Promise.resolve( '0.000001' )
+        () => Promise.resolve( 0.000001 )
       )
     )
 
@@ -40,7 +40,7 @@ export default class Index extends Utils {
       this._createStep(
         'approx( -1.1e+3 / 2.2e-1, 2 )',
         () => Promise.resolve( approx( -1.1e+3 / 2.2e-1, 2 ) ),
-        () => Promise.resolve( '-5000.00' )
+        () => Promise.resolve( -5000.00 )
       )
     )
 

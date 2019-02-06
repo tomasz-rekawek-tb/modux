@@ -63,7 +63,7 @@ export class Layout extends Component {
     } )
   }
 
-  stateChange ( url ) {
+  onStateChange ( url ) {
     let urlData = url.split( '#' )
 
     // Update active menu
