@@ -41,29 +41,31 @@ export class Component {
   /**
    * Creates an instance of Component
    * @param {HTMLElement} parent The parent wrapper
+   * @param {Module} application The parent module instance
    * @param {Config} config A Config class instance
    * @param {Store} store A Store class instance
    */
-  constructor ( parent, config, store ) {
+  constructor ( parent, application, config, store ) {
     /**
      * A unique identifier
      * @type {String}
      * @public
      */
     this.uid = uid()
+
     /**
      * The parent wrapper
      * @type {HTMLElement}
      * @public
      */
     this.parent = parent
+
     /**
-     * The component view
-     * @type {HTMLElement}
+     * The parent module instance
+     * @type {Module}
      * @public
      */
-    this.element = html( this.template )
-
+    this.application = application
     /**
      * The config class of the module parent
      * @type {Config}
@@ -76,6 +78,13 @@ export class Component {
      * @public
      */
     this.store = store
+
+    /**
+     * The component view
+     * @type {HTMLElement}
+     * @public
+     */
+    this.element = html( this.template )
 
     // Append element to the dom
     this.parent.appendChild( this.element )
