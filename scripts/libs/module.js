@@ -10,16 +10,21 @@ import { store } from './store.js'
 
 /**
  * The attribute name used to determine if an HTMLElement is a component
+ * @type {String}
+ * @private
  */
 const _attrComponent = 'data-modux-component'
 /**
  * The attribute name used to determine if an HTMLElement ( usually an anchor tag ) is a state change component. This will prevent server reload on anchor tags.
+ * @type {String}
+ * @private
  */
 const _attrLink = 'data-modux-link'
 
 /**
  * A shorthand for the link element handler
  * @param {Event} e
+ * @private
  */
 const linkHandler = function ( e ) {
   let url = this.getAttribute( 'href' )
@@ -37,6 +42,7 @@ export class Module {
    * A method used to add components to the Module
    * @param {String} name The name under which the Component will be known as
    * @param {Component} dependency The Component to be added
+   * @return {Module} The instance of Module
    */
   addDependency ( name, dependency ) {
     this.__dependencies[ name ] = dependency
@@ -45,6 +51,7 @@ export class Module {
   /**
    * A method used to remove components from the Module
    * @param {String} name The name of the Component to be removed
+   * @return {Module} The instance of Module
    */
   removeDependency ( name ) {
     if ( this.__dependencies[ name ] ) {
@@ -61,33 +68,38 @@ export class Module {
     /**
      * A unique name for the application, for easier management
      * @type {String}
+     * @private
      */
     this.__name = name
     /**
      * Contains all the components added to the module
      * @type {Object}
+     * @private
      */
     this.__dependencies = {}
     /**
      * Contains a new instance of Config which is passed on to all components
      * @type {Config}
+     * @public
      */
-    this.__config = config.create()
+    this.config = config.create()
     /**
      * Contains a new instance of Store which is passed on to all components
      * @type {Store}
+     * @public
      */
-    this.__store = store.create()
+    this.store = store.create()
   }
 
   /**
    * Creates a component on an HTMLElement if it doesn't have one already
    * @param {HTMLElement} element The HTMLElement to bind the Component to
    * @param {Component} Component The Component to be bound
+   * @private
    */
   __createComponent ( element, Component ) {
     if ( !element.moduxComponent ) {
-      element.moduxComponent = new Component( element, this, this.__config, this.__store )
+      element.moduxComponent = new Component( element, this, this.config, this.store )
       element.moduxComponent.execute()
     }
   }
@@ -95,6 +107,7 @@ export class Module {
   /**
    * Removes a component from an HTMLElement if it has one
    * @param {HTMLElement} element The HTMLElement for which we want to remove the Component
+   * @private
    */
   __removeComponent ( element ) {
     if ( element.moduxComponent ) {
@@ -105,6 +118,7 @@ export class Module {
   /**
    * Creates a link component on an HTMLElement if it doesn't have one already
    * @param {HTMLElement} element The HTMLElement to bind the link to
+   * @private
    */
   __createComponentLink ( element ) {
     if ( !element.moduxLink ) {
@@ -115,6 +129,7 @@ export class Module {
   /**
    * Removes a link component from an HTMLElement if it has one
    * @param {HTMLElement} element The HTMLElement for which we want to remove the link
+   * @private
    */
   __removeComponentLink ( element ) {
     if ( element.moduxLink ) {
@@ -128,6 +143,7 @@ export class Module {
    * @param {HTMLElement} node HTMLElement what we are checking
    * @param {String} attr The attribute to watch out for
    * @param {Function} handler The callback function which will be called after the checks are made
+   * @private
    */
   __loopOnElements ( node, attr, handler ) {
     if ( !( node instanceof HTMLElement ) ) {
@@ -199,7 +215,7 @@ export class Module {
     /**
      * Holds the main Component which is used for the Module.
      */
-    this.__component = new this.__dependencies[ component ]( element, this, this.__config, this.__store )
+    this.__component = new this.__dependencies[ component ]( element, this, this.config, this.store )
     element.moduxComponent = this.__component
     element.moduxComponent.execute()
   }

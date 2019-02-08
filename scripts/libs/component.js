@@ -151,6 +151,7 @@ export class Component {
 
   /**
    * The method gets called when the component is destroyed
+   * @private
    */
   __destroy () {
     this.__stateWatcher()
