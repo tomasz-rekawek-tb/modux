@@ -33,7 +33,7 @@ export default class Index extends Utils {
     test.querySelector( '.steps' ).appendChild(
       this._createStep(
         `
-          font( 'No font', null, null, 10 )<br/>
+          font( 'No font', null, 10 )<br/>
           &nbsp;&nbsp;.then( () => {<br/>
           &nbsp;&nbsp;&nbsp;&nbsp;resolve( 'Font loaded' )<br/>
           &nbsp;&nbsp;} )<br/>
@@ -42,7 +42,32 @@ export default class Index extends Utils {
           &nbsp;&nbsp;} )
         `,
         () => new Promise( ( resolve ) => {
-          font( 'No font', null, null, 10 )
+          font( 'No font', null, 10 )
+            .then( () => {
+              resolve( 'Font loaded' )
+            } )
+            .catch( () => {
+              resolve( 'Font not found' )
+            } )
+        } ),
+        () => Promise.resolve( 'Font not found' )
+      )
+    )
+
+    // Step 3
+    test.querySelector( '.steps' ).appendChild(
+      this._createStep(
+        `
+          font( 'No font', { 'font-weight': 'bold' }, 10, 500 )<br/>
+          &nbsp;&nbsp;.then( () => {<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;resolve( 'Font loaded' )<br/>
+          &nbsp;&nbsp;} )<br/>
+          &nbsp;&nbsp;.catch( () => {<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;resolve( 'Font not found' )<br/>
+          &nbsp;&nbsp;} )
+        `,
+        () => new Promise( ( resolve ) => {
+          font( 'No font', { 'font-weight': 'bold' }, 10, 500 )
             .then( () => {
               resolve( 'Font loaded' )
             } )

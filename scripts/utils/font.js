@@ -42,11 +42,12 @@ let createBlankFont = () => {
  * A function to check if a font has been loaded
  * @param {String} font The font name to be loaded
  * @param {Object} styles The styles to load, bold, italic, etc...
- * @param {Number} interval The time in milliseconds it takes to retry the load
- * @param {Number} attempts The number of attempts before the promise is rejected
+ * @param {Number=5} attempts The number of attempts before the promise is rejected
+ * @param {Number=100} interval The time in milliseconds it takes to retry the load
  * @return {Promise} A promise that is resolved when the font is loaded
  */
-export let font = ( font, styles, interval, attempts ) => {
+export let font = ( font, styles, attempts, interval ) => {
+  attempts = attempts || 5
   let blank = createBlankFont()
   document.getElementsByTagName( 'head' )[0].appendChild( blank )
 
@@ -81,9 +82,6 @@ export let font = ( font, styles, interval, attempts ) => {
       }
     }
 
-    // Delay to allow AdobeBlank font to load
-    setTimeout( () => {
-      timer()
-    }, 500 )
+    timer()
   } )
 }

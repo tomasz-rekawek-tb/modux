@@ -20,7 +20,7 @@ let initialize = () => {
   app
     .addDependency( 'layout', Layout )
 
-  app.__config.set( 'app', app )
+  app.config.set( 'app', app )
 
   // Start application
   app.bootstrap( document.querySelector( 'body' ), 'layout' )
