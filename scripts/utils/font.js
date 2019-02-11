@@ -74,10 +74,11 @@ export class Font {
      */
     this.__fontfile = html( '<style></style>' )
     document.head.appendChild( this.__fontfile )
-    let data = ''
+    let data = 'src: '
     loop( srcs, ( src ) => {
-      data += 'src: ' + src + ';\n'
+      data += src + ','
     } )
+    data += ';\n'
     loop( this.__styles, ( value, key ) => {
       data += key + ': ' + value + ';\n'
     } )
