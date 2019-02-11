@@ -74,6 +74,7 @@ module.exports = () => {
       port: 8080,
       contentBase: build,
       historyApiFallback: true,
+      disableHostCheck: true,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': 'true',
