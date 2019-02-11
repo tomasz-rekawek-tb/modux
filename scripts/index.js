@@ -15,7 +15,7 @@ import { approx } from './utils/approx.js'
 import { cookie } from './utils/cookie.js'
 import { DateTime } from './utils/datetime.js'
 import { extend } from './utils/extend.js'
-import { font } from './utils/font.js'
+import { Font } from './utils/font.js'
 import { getter } from './utils/getter.js'
 import { html } from './utils/html.js'
 import { isNumber } from './utils/isnumber.js'
@@ -42,5 +42,5 @@ export {
   Component,
   Module,
 
-  approx, cookie, DateTime, extend, font, getter, html, isNumber, isObject, loader, logger, loop, radians, rnd, scroll, setter, sounds, uid
+  approx, cookie, DateTime, extend, Font, getter, html, isNumber, isObject, loader, logger, loop, radians, rnd, scroll, setter, sounds, uid
 }
