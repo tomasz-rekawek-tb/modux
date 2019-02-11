@@ -76,7 +76,7 @@ export class Font {
     document.head.appendChild( this.__fontfile )
     let data = ''
     loop( srcs, ( src ) => {
-      data += 'src: \'' + src + '\';\n'
+      data += 'src: ' + src + ';\n'
     } )
     loop( this.__styles, ( value, key ) => {
       data += key + ': ' + value + ';\n'

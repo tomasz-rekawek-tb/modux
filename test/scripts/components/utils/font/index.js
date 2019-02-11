@@ -122,10 +122,10 @@ export default class Index extends Utils {
         `
           let font = Font.create( 'WH Hoxton', { 'font-weight': 'bold' } )<br/>
           font.get( [<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;'url(\\'/fonts/WHHoxtonWeb-Bold.ttf\\') format(\\'truetype\\')',<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;'url(\\'/fonts/WHHoxton-Bold.otf\\') format(\\'opentype\\')'<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;'url(\\'/wrong-path/no-font.ttf\\') format(\\'truetype\\')',<br/>
+          &nbsp;&nbsp;&nbsp;&nbsp;'url(\\'/wrong-path/no-font.otf\\') format(\\'opentype\\')'<br/>
           &nbsp;&nbsp;] )<br/>
-          &nbsp;&nbsp;.load( 10 )<br/>
+          &nbsp;&nbsp;.load( 10, 500 )<br/>
           &nbsp;&nbsp;.then( () => {<br/>
           &nbsp;&nbsp;&nbsp;&nbsp;font.destroy()<br/>
           &nbsp;&nbsp;&nbsp;&nbsp;resolve( 'Font loaded' )<br/>
@@ -137,10 +137,10 @@ export default class Index extends Utils {
         () => new Promise( ( resolve ) => {
           let font = Font.create( 'WH Hoxton', { 'font-weight': 'bold' } )
           font.get( [
-            `url('/fonts/WHHoxtonWeb-Bold.ttf') format('truetype')`,
-            `url('/fonts/WHHoxton-Bold.otf') format('opentype')`
+            `url('/wrong-path/no-font.ttf') format('truetype')`,
+            `url('/wrong-path/no-font.otf') format('opentype')`
           ] )
-            .load( 10 )
+            .load( 10, 500 )
             .then( () => {
               font.destroy()
               resolve( 'Font loaded' )
@@ -149,7 +149,7 @@ export default class Index extends Utils {
               resolve( 'Font not found' )
             } )
         } ),
-        () => Promise.resolve( 'Font loaded' )
+        () => Promise.resolve( 'Font not found' )
       )
     )
 
