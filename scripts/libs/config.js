@@ -9,14 +9,15 @@ import { setter } from './../utils/setter.js'
 class Config {
   /**
    * Creates an instance of Config
+   * @param {Object} defaults The default configuration for the current instance
    */
-  constructor () {
+  constructor ( defaults ) {
     /**
      * Contains all the configuration data
      * @type {Object}
      * @private
      */
-    this.__configuration = {}
+    this.__configuration = defaults || {}
   }
 
   /**
@@ -40,10 +41,11 @@ class Config {
 
   /**
    * Returns an instance of Config
+   * @param {Object} defaults The default configuration for the current instance
    * @return { Config }
    */
-  create () {
-    return new Config()
+  create ( defaults ) {
+    return new Config( defaults )
   }
 }
 
