@@ -14,7 +14,7 @@
 
 import { Component } from 'modux'
 
-const template = require( './template.html' )
+import template from './template.html'
 
 export class Component1 extends Component {
   get template () {
@@ -41,7 +41,7 @@ export class Component1 extends Component {
 
 import { Component } from 'modux'
 
-const template = require( './template.html' )
+import template from './template.html'
 
 export class Component2 extends Component {
   get template () {
@@ -72,7 +72,7 @@ export class Component2 extends Component {
 
 import { Component } from 'modux'
 
-const template = require( './template.html' )
+import template from './template.html'
 
 export class Layout extends Component {
   get template () {

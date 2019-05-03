@@ -14,7 +14,7 @@
 
 import { Component } from 'modux'
 
-const template = require( './template.html' )
+import template from './template.html'
 
 export class Layout extends Component {
   get template () {
