@@ -9,7 +9,7 @@ import { loop } from './loop.js'
  * @external {Adobe Blank} https://github.com/adobe-fonts/adobe-blank
  * @private
  */
-const AdobeBlankCss = require( './../../styles/adobe-blank.inline.scss' )
+import AdobeBlankCss from './../../styles/adobe-blank.inline.scss'
 
 /**
  * Creates a font test container

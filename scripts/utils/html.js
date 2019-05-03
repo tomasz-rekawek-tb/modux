@@ -8,6 +8,6 @@
  */
 export let html = ( text ) => {
   let container = document.createElement( 'section' )
-  container.innerHTML = text.trim()
+  container.innerHTML = ( text.default ) ? text.default : text.trim()
   return container.firstChild
 }
