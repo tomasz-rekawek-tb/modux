@@ -62,11 +62,11 @@ export class Module {
 
   /**
    * Creates an instance of Module
-   * @param {String} [name] A unique name for the application, for easier management
+   * @param {String} [name] A unique name for the module, for easier management
    */
   constructor ( name ) {
     /**
-     * A unique name for the application, for easier management
+     * A unique name for the module, for easier management
      * @type {String}
      * @private
      */

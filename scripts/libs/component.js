@@ -41,11 +41,11 @@ export class Component {
   /**
    * Creates an instance of Component
    * @param {HTMLElement} parent The parent wrapper
-   * @param {Module} application The parent module instance
+   * @param {Module} module The parent module instance
    * @param {Config} config A Config class instance
    * @param {Store} store A Store class instance
    */
-  constructor ( parent, application, config, store ) {
+  constructor ( parent, module, config, store ) {
     /**
      * A unique identifier
      * @type {String}
@@ -65,7 +65,7 @@ export class Component {
      * @type {Module}
      * @public
      */
-    this.application = application
+    this.module = module
     /**
      * The config class of the module parent
      * @type {Config}
