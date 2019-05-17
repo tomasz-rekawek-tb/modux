@@ -40,7 +40,8 @@ module.exports = () => {
         progressive: true
       },
       pngquant: {
-        strip: true
+        strip: true,
+        quality: '30-50'
       }
     } ),
     new webpack.DefinePlugin( { 'PRODUCTION': prod } )
