@@ -142,7 +142,7 @@ export class Font {
 
       setTimeout( () => {
         timer()
-      }, 100 )
+      }, interval || 100 )
     } )
   }
 }
