@@ -70,7 +70,7 @@ export class Communication {
       if ( self.__request.status === 200 ) {
         end( null, ev.target.responseText )
       } else {
-        end( self.__request.status, ev.target.responseText )
+        end( self.__request.status, ev.target )
       }
     }
     if ( progress ) {

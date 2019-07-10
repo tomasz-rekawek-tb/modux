@@ -10,10 +10,10 @@
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
-    "url": "https://github.com/CrispCode/modux.git"
+    "url": "https://github.com/tomasz-rekawek-tb/modux.git"
   },
   "bugs": {
-    "url": "https://github.com/CrispCode/modux/issues"
+    "url": "https://github.com/tomasz-rekawek-tb/modux/issues"
   },
   "dependencies": {
     "@babel/core": "^7.2.2",
